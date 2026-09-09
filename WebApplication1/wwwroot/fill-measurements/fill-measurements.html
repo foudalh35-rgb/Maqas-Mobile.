@@ -1,0 +1,1777 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - إدخال المقاسات والخانات</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at 50% 0%, #1a1710 0%, #0a0a0a 80%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي - بدون شريط علوي (مكان فارغ نظيف) */
+        
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0 0 40px 0;
+            align-items: center;
+        }
+
+        /* 3. الهيدر الذهبي الممتد */
+        .web-header {
+            background: linear-gradient(135deg, #dbc38b 0%, #b8974e 100%);
+            color: #000000;
+            padding: 22px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.25);
+            width: 100%;
+            margin: 0 0 25px 0;
+        }
+
+        .header-title-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 0 auto;
+        }
+
+        .back-nav-btn {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .back-nav-btn:hover {
+            background: #000;
+            color: #dbc38b;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 12px;
+            background: #141414;
+            padding: 6px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .cat-tab {
+            padding: 10px 24px;
+            border-radius: 14px;
+            color: #888;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cat-tab.active {
+            background: #dbc38b;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.3);
+        }
+
+        .cat-tab:hover:not(.active) {
+            color: #fff;
+            background: #222;
+        }
+
+        /* 3. حاوية نموذج المقاسات واسعة ومتمركزة بجمال */
+        .grid-container {
+            width: 100%;
+            max-width: 1350px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        /* 4. بطاقة نموذج المقاسات الفاخرة العريضة جداً */
+        .form-luxury-card {
+            background: #111111;
+            border: 1px solid rgba(219, 195, 139, 0.35);
+            border-radius: 28px;
+            padding: 45px 55px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 1350px;
+        }
+
+        /* 5. نافذة التراكب المنبثقة للملخص (Modal Popup Overlay) تطفو فوق الصفحة وتترك المقاسات واضحة خلفها */
+        .summary-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(2px);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .summary-modal-overlay.active {
+            display: flex;
+            animation: fadeInModal 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .summary-modal-card {
+            width: 100%;
+            max-width: 540px;
+            background: #141414;
+            border: 2px solid #dbc38b;
+            border-radius: 28px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 0 40px rgba(219, 195, 139, 0.35), 0 30px 80px rgba(0, 0, 0, 0.95);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #262626;
+            padding-bottom: 15px;
+        }
+
+        .summary-title {
+            color: #dbc38b;
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-modal-btn,
+        .close-modal-icon {
+            background: rgba(219, 195, 139, 0.12);
+            border: 1px solid #dbc38b;
+            color: #dbc38b;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal-btn:hover,
+        .close-modal-icon:hover {
+            background: #dbc38b;
+            color: #111111;
+            transform: scale(1.08);
+            box-shadow: 0 0 15px rgba(219, 195, 139, 0.5);
+        }
+
+        .summary-preview-img {
+            width: 100%;
+            height: 220px;
+            background: #181818;
+            border-radius: 18px;
+            border: 1px solid #333333;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .summary-preview-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .summary-details-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #181818;
+            border: 1px solid #262626;
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+            color: #cccccc;
+        }
+
+        .summary-item strong {
+            color: #ffffff;
+        }
+
+        .price-badge-box {
+            background: rgba(219, 195, 139, 0.1);
+            border: 1px solid #dbc38b;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-title {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .price-val {
+            color: #dbc38b;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .secondary-btn {
+            background: #222222;
+            color: #ffffff;
+            border: 1px solid #444444;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .secondary-btn:hover {
+            background: #333333;
+            border-color: #dbc38b;
+            color: #dbc38b;
+        }
+
+        .customer-bar {
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 20px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            border: 2px solid #dbc38b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dbc38b;
+            font-size: 22px;
+        }
+
+        .grid-3-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .form-group label {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #dbc38b;
+            font-size: 16px;
+        }
+
+        .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            right: 18px;
+            color: #dbc38b;
+            font-size: 19px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .input-with-icon .input-box {
+            padding-right: 48px;
+            text-align: right;
+        }
+
+        .input-box {
+            background: #242424;
+            border: 1.5px solid #3d3d3d;
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            transition: all 0.25s ease;
+            width: 100%;
+            min-height: 58px;
+        }
+
+        .input-box:focus {
+            border-color: #dbc38b;
+            background: #2d2d2d;
+            box-shadow: 0 0 15px rgba(219, 195, 139, 0.4);
+        }
+
+        /* تصميم كروت الاختيار المخصصة مع أيقونة + واضحة بـ SVG بدلاً من النقطة */
+        .option-select-box {
+            position: relative;
+            background: #242424;
+            border: 1.5px solid #3d3d3d;
+            border-radius: 16px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.3s;
+            min-height: 58px;
+        }
+
+        .option-select-box:hover {
+            border-color: #dbc38b;
+            background: #2d2d2d;
+        }
+
+        .plus-badge-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(219, 195, 139, 0.15);
+            border: 1px solid #dbc38b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .select-custom-element {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 700;
+            width: 100%;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .select-custom-element option {
+            background: #1c1c1c;
+            color: #ffffff;
+        }
+
+        .arrow-down-icon {
+            color: #dbc38b;
+            font-size: 14px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .textarea-box {
+            background: #333333;
+            border: 1px solid #444444;
+            border-radius: 18px;
+            padding: 16px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            resize: vertical;
+            min-height: 120px;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        .textarea-box:focus {
+            border-color: #dbc38b;
+        }
+
+        .submit-btn {
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 18px;
+            border-radius: 20px;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(219, 195, 139, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: #c4a768;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.4);
+        }
+
+        /* 5. القائمة الجانبية (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 14px;
+            background: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #252525;
+            color: #dbc38b;
+            padding-right: 22px;
+        }
+
+        .drawer-menu li a.highlight-menu {
+            border: 1px solid #dbc38b;
+            background: rgba(219, 195, 139, 0.1);
+            color: #dbc38b;
+        }
+
+        .drawer-menu li a.highlight-menu:hover {
+            background: #dbc38b;
+            color: #000000;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                background-color: #0d0d0d;
+                margin-right: 0;
+                width: 100%;
+                padding-bottom: 120px;
+            }
+
+            .web-sidebar {
+                bottom: 0;
+                top: auto;
+                right: 0;
+                width: 100%;
+                height: 75px;
+                flex-direction: row;
+                padding: 0 20px;
+                border-top: 1px solid #222222;
+                border-left: none;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .sidebar-item.active::before {
+                display: none;
+            }
+
+            .grid-container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+
+            .summary-luxury-card {
+                width: 100%;
+                position: static;
+            }
+
+            .grid-3-col,
+            .grid-2-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة المنزلقة العليا -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item" onclick="window.location.href='/customer-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/choose-tailor.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                    <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                    <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                </svg>
+                <span>الخياطين</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/app-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <div class="main-wrapper">
+
+        <!-- الهيدر العلوي الذهبي -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">مقاسات الثوب الرجالي</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- حاوية نموذج المقاسات وخانات الخيارات بالكامل -->
+        <main class="grid-container">
+
+            <div class="form-luxury-card">
+
+                <!-- اسم العميل وخانة الكتابة التفاعلية مع أيقونة المستخدم -->
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="justify-content: flex-start; text-align: right; color: #dbc38b; font-size: 19px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        اسم العميل / صاحب المقاس
+                    </label>
+                    <div class="input-with-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <input type="text" id="custName" class="input-box"
+                            placeholder="أدخل اسم العميل (مثال: صالح الكميم)..." value="">
+                    </div>
+                </div>
+
+                <!-- الصف الأول: رقم الهاتف | نوع القماش | رقم القماش 2 -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            رقم الهاتف
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <input type="text" id="custPhone" class="input-box" placeholder="أدخل رقم الهاتف...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            نوع القماش
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            <input type="text" id="fabricType" class="input-box" placeholder="مثال: قطن أبيض فاخر...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="4" y1="9" x2="20" y2="9"></line>
+                                <line x1="4" y1="15" x2="20" y2="15"></line>
+                                <line x1="10" y1="3" x2="8" y2="21"></line>
+                                <line x1="16" y1="3" x2="14" y2="21"></line>
+                            </svg>
+                            رقم القماش 2
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="4" y1="9" x2="20" y2="9"></line>
+                                <line x1="4" y1="15" x2="20" y2="15"></line>
+                                <line x1="10" y1="3" x2="8" y2="21"></line>
+                                <line x1="16" y1="3" x2="14" y2="21"></line>
+                            </svg>
+                            <input type="text" id="fabricNo" class="input-box" placeholder="مثال: 12...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الصف الثاني: الكمية | المبلغ -->
+                <div class="grid-2-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            الكمية
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <input type="number" id="custQty" class="input-box" placeholder="أدخل الكمية (مثال: 1)...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                            المبلغ
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                            <input type="text" id="totalAmount" class="input-box" placeholder="مثال: $30..."
+                                style="color: #dbc38b; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #333; margin: 5px 0;">
+
+                <!-- صف المقاسات الأول: طول الكم | الكتف | الطول -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                                </path>
+                            </svg>
+                            طول الكم
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                                </path>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            الكتف
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="5 12 12 19 19 12"></polyline>
+                            </svg>
+                            الطول
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="5 12 12 19 19 12"></polyline>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صف المقاسات الثاني: وسع اليد | الرقبة | وسع الصدر -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                                <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"></path>
+                                <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
+                            </svg>
+                            وسع اليد
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                                <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"></path>
+                                <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                            </svg>
+                            الرقبة
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <polyline points="9 21 3 21 3 15"></polyline>
+                                <line x1="21" y1="3" x2="14" y2="10"></line>
+                                <line x1="3" y1="21" x2="10" y2="14"></line>
+                            </svg>
+                            وسع الصدر
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <polyline points="9 21 3 21 3 15"></polyline>
+                                <line x1="21" y1="3" x2="14" y2="10"></line>
+                                <line x1="3" y1="21" x2="10" y2="14"></line>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صف المقاسات الثالث: طول الكبك | الخطوة | برد / الكتف الفرعي -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                                </path>
+                            </svg>
+                            طول الكبك
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                                </path>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            الخطوة
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="6" cy="6" r="3"></circle>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            </svg>
+                            برد / الكتف الفرعي
+                        </label>
+                        <div class="input-with-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="6" cy="6" r="3"></circle>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            </svg>
+                            <input type="number" class="input-box" placeholder="القياس بالسم...">
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #333; margin: 10px 0;">
+
+                <!-- خانات الاختيارات التفصيلية ذات أيقونة الزائد الذهبية الواضحة والسهم -->
+                <!-- المجموعة الأولى: اليد | الجبرور | الرقبة -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                            </svg>
+                            تفصيل اليد
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر تفصيل اليد...</option>
+                                <option>سادة</option>
+                                <option>كبك ملون</option>
+                                <option>مطاط</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            </svg>
+                            الجبرور
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر نوع الجبرور...</option>
+                                <option>عادي</option>
+                                <option>مخفي</option>
+                                <option>مطرز</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                            </svg>
+                            الرقبة
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر تفصيل الرقبة...</option>
+                                <option>قلاب</option>
+                                <option>سادة دائري</option>
+                                <option>عماني</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجموعة الثانية: الأزرار | نوع التفصيل | الجيوب -->
+                <div class="grid-3-col">
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            الأزرار
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر شكل الأزرار...</option>
+                                <option>ظاهرة</option>
+                                <option>مخفية (سحاب)</option>
+                                <option>كبس ذهبي</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                            نوع التفصيل
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر ستايل التفصيل...</option>
+                                <option>سعودي فاخر</option>
+                                <option>إماراتي</option>
+                                <option>كويتي</option>
+                                <option>عماني</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 8v13H3V8"></path>
+                                <path d="M1 3h22v5H1z"></path>
+                            </svg>
+                            الجيوب
+                        </label>
+                        <div class="option-select-box">
+                            <div class="plus-badge-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <select class="select-custom-element">
+                                <option value="">اختر نوع الجيوب...</option>
+                                <option>جيبين جانبية + جوال</option>
+                                <option>جيب واحد علوي</option>
+                                <option>بدون جيب علوي</option>
+                            </select>
+                            <div class="arrow-down-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dbc38b"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الملاحظات الكبير -->
+                <div class="form-group">
+                    <label style="justify-content: flex-start; font-size: 18px; font-weight: 800; color: #dbc38b;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        ملاحظات إضافية للخيّاط
+                    </label>
+                    <textarea class="textarea-box"
+                        placeholder="اكتب أي ملاحظات أو تفاصيل خاصة للخيّاط هنا..."></textarea>
+                </div>
+
+                <!-- زر إرسال الطلب الذهبي الفخم لفتح معاينة الطلب -->
+                <button type="button" class="submit-btn" onclick="openOrderSummaryModal()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>إرسال الطلب والمعاينة</span>
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>مقاسك</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/customer-dashboard.html">
+                    <span>الرئيسية</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html" class="highlight-menu">
+                    <span>📑 تقارير التفصيل المحفوظة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html">
+                    <span>طلباتي</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 16 14"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/payment.html">
+                    <span>طريقة الدفع</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/ready-sizes.html">
+                    <span>حفظ</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('تم تنفيذ العملية')">
+                    <span>حذف</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/choose-tailor.html">
+                    <span>قائمة الخياطين</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('لا توجد إشعارات جديدة حالياً')">
+                    <span>الاشعارات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 5. نافذة التراكب المنبثقة لمعاينة تفاصيل الطلب عند الضغط على زر إرسال الطلب -->
+    <div class="summary-modal-overlay" id="summaryModal">
+        <div class="summary-modal-card">
+            <div class="summary-header">
+                <h3
+                    style="font-size: 22px; color: #dbc38b; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-check-circle" style="color: #dbc38b;"></i> معاينة تفاصيل طلب الثوب الرجالي
+                </h3>
+                <div class="close-modal-icon" onclick="closeOrderSummaryModal()" title="إرجاع">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 14L4 9l5-5"></path>
+                        <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- معاينة صورة المنتج والقماش المختارة -->
+            <div class="summary-item-card"
+                style="background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 18px; padding: 16px; display: flex; gap: 15px; align-items: center; margin-bottom: 15px;">
+                <img id="summaryModalImg" src="/images/thobe_saudi.png" alt="معاينة الثوب"
+                    style="width: 85px; height: 85px; object-fit: contain; background: #111; border-radius: 14px; border: 1px solid #dbc38b; padding: 4px;"
+                    onerror="this.src='/images/thobe_saudi.png';">
+                <div style="flex: 1;">
+                    <h4 id="summaryModalTitle" style="color: #fff; font-size: 18px; margin-bottom: 6px;">ثوب سعودي أصيل
+                    </h4>
+                    <span id="summaryModalBadge"
+                        style="background: rgba(219,195,139,0.15); color: #dbc38b; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 700;">سعودي
+                        رسمياً</span>
+                </div>
+            </div>
+
+            <!-- تفاصيل ملخص الطلب -->
+            <div class="summary-details-list">
+                <div class="summary-item">
+                    <span>الخيّاط المختار:</span>
+                    <strong>الناصر للخياطة</strong>
+                </div>
+                <div class="summary-item">
+                    <span>اسم العميل:</span>
+                    <strong id="modalCustName" style="color: #dbc38b;">غير محدد</strong>
+                </div>
+                <div class="summary-item">
+                    <span>رقم الهاتف:</span>
+                    <strong id="modalCustPhone">---</strong>
+                </div>
+                <div class="summary-item">
+                    <span>نوع ورقم القماش:</span>
+                    <strong id="modalFabric">قطن أبيض ممتاز (12)</strong>
+                </div>
+                <div class="summary-item">
+                    <span>عدد القطع (الكمية):</span>
+                    <strong id="modalQty">1 ثوب</strong>
+                </div>
+                <div class="summary-item">
+                    <span>حالة المقاسات:</span>
+                    <strong id="modalMeasurementsStatus" style="color: #60a5fa;">مكتملة ودقيقة</strong>
+                </div>
+            </div>
+
+            <!-- صندوق الحساب والمبلغ الإجمالي -->
+            <div class="price-badge-box">
+                <div>
+                    <div class="price-title">المبلغ الإجمالي</div>
+                    <div style="font-size: 12px; color: #aaaaaa;">شامل التفصيل والقماش</div>
+                </div>
+                <div class="price-val" id="modalTotalAmount">$30</div>
+            </div>
+
+            <!-- أزرار الإجراء السريع -->
+            <button type="button" class="submit-btn" style="margin-top: 0;"
+                onclick="saveOrderDetailsBeforePay(); window.location.href='/payment.html'">
+                <i class="fas fa-credit-card"></i> تأكيد الطلب والمتابعة للدفع
+            </button>
+
+            <button type="button" class="secondary-btn" onclick="closeOrderSummaryModal()">
+                <i class="fas fa-edit"></i> تعديل المقاسات والخانات
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function getSelectedProduct() {
+            const params = new URLSearchParams(window.location.search);
+            let img = params.get('img');
+            let title = params.get('title');
+            let badge = params.get('badge');
+            let category = params.get('category');
+
+            if (!img || !title) {
+                try {
+                    const stored = localStorage.getItem('selectedProduct');
+                    if (stored) {
+                        const parsed = JSON.parse(stored);
+                        const isThobe = parsed.category === 'thobe' ||
+                            (parsed.title && (parsed.title.includes('ثوب') || parsed.title.includes('رجالي')) && !parsed.title.includes('بدلة') && !parsed.title.includes('فستان') && !parsed.title.includes('بالطو'));
+
+                        if (isThobe) {
+                            if (!img && parsed.img) img = parsed.img;
+                            if (!title && parsed.title) title = parsed.title;
+                            if (!badge && parsed.badge) badge = parsed.badge;
+                        }
+                    }
+                } catch (e) { }
+            }
+            return {
+                img: img || '/images/thobe_saudi.png',
+                title: title || 'ثوب سعودي أصيل',
+                badge: badge || 'سعودي رسمياً',
+                category: 'thobe'
+            };
+        }
+
+        function updateProductPreview() {
+            const prod = getSelectedProduct();
+            if (prod.img) {
+                const imgEl = document.getElementById('summaryModalImg');
+                if (imgEl) imgEl.src = prod.img;
+            }
+            if (prod.title) {
+                const titleEl = document.getElementById('summaryModalTitle') || document.getElementById('summaryModalTitleText');
+                if (titleEl) titleEl.innerText = prod.title;
+            }
+            if (prod.badge) {
+                const badgeEl = document.getElementById('summaryModalBadge');
+                if (badgeEl) badgeEl.innerText = prod.badge;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateProductPreview);
+
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function openOrderSummaryModal() {
+            updateProductPreview();
+
+            const nameVal = document.getElementById('custName') ? document.getElementById('custName').value.trim() : "";
+            const phoneVal = document.getElementById('custPhone') ? document.getElementById('custPhone').value.trim() : "";
+            const totalVal = document.getElementById('totalAmount') ? document.getElementById('totalAmount').value.trim() : "";
+            const fabricVal = document.getElementById('fabricType') ? document.getElementById('fabricType').value.trim() : "";
+            const fabricNoVal = document.getElementById('fabricNo') ? document.getElementById('fabricNo').value.trim() : "";
+            const qtyVal = document.getElementById('custQty') ? document.getElementById('custQty').value.trim() : "";
+
+            // حساب عدد المقاسات المدخلة
+            const numInputs = document.querySelectorAll('input[type="number"]');
+            let filledCount = 0;
+            numInputs.forEach(input => {
+                if (input.value && input.value.trim() !== '') filledCount++;
+            });
+
+            document.getElementById('modalCustName').innerText = nameVal !== "" ? nameVal : "صالح الكميم";
+            document.getElementById('modalCustPhone').innerText = phoneVal !== "" ? phoneVal : "---";
+
+            let fabricText = fabricVal !== "" ? fabricVal : "قطن أبيض ممتاز";
+            if (fabricNoVal !== "") fabricText += ` (${fabricNoVal})`;
+            document.getElementById('modalFabric').innerText = fabricText;
+
+            document.getElementById('modalQty').innerText = qtyVal !== "" ? (qtyVal + " ثوب") : "1 ثوب";
+            document.getElementById('modalTotalAmount').innerText = totalVal !== "" ? (totalVal.startsWith('$') ? totalVal : '$' + totalVal) : "$30";
+            document.getElementById('modalMeasurementsStatus').innerText = filledCount > 0 ? `تم إدخال (${filledCount}) مقاساً` : "مقاسات القياس العامة مكتملة";
+
+            document.getElementById('summaryModal').classList.add('active');
+        }
+
+        function saveOrderDetailsBeforePay() {
+            const prod = getSelectedProduct();
+            const orderData = {
+                custName: document.getElementById('modalCustName').innerText,
+                custPhone: document.getElementById('modalCustPhone').innerText,
+                totalAmount: document.getElementById('modalTotalAmount').innerText,
+                fabric: document.getElementById('modalFabric').innerText,
+                qty: document.getElementById('modalQty').innerText,
+                serviceType: prod.title || "تفصيل ثوب رجالي ممتاز",
+                productImg: prod.img || "/images/thobe_saudi.png"
+            };
+            localStorage.setItem('pendingOrderData', JSON.stringify(orderData));
+        }
+
+        function closeOrderSummaryModal() {
+            document.getElementById('summaryModal').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

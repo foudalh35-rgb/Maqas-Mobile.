@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Maqas Clean Architecture/">
+    <Project Path="Maqas.Domain/Maqas.Domain.csproj" />
+    <Project Path="Maqas.Application/Maqas.Application.csproj" />
+    <Project Path="Maqas.Infrastructure/Maqas.Infrastructure.csproj" />
+    <Project Path="Maqas.Web/Maqas.Web.csproj" />
+  </Folder>
+  <Project Path="WebApplication1/WebApplication1.csproj" />
+</Solution>

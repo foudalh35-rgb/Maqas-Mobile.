@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - إنشاء حساب جديد</title>
+    <!-- استدعاء أيقونات FontAwesome الاحترافية -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .global-gold-bar {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(180deg, #f3cf65 0%, #d4af37 70%, #b89222 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            margin-top: 20px;
+        }
+
+        .role-selector {
+            display: flex;
+            background: #1a1a1a;
+            padding: 5px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: #888;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .role-btn.active {
+            background: linear-gradient(45deg, #d4af37, #aa820a);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: #161616 !important;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            color: #fff !important;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #d4af37, #aa820a);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .login-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+    <div class="global-gold-bar"></div>
+
+    <div class="form-box">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="color: #d4af37; font-size: 24px; font-weight: 700; margin-bottom: 6px;">إنشاء حساب جديد</h2>
+            <p style="color: #888; font-size: 14px;">قم بإدخال بياناتك للانضمام إلى نظام مقاسات وتفاصيل</p>
+        </div>
+
+        <div class="role-selector">
+            <button type="button" class="role-btn active" id="btnCustomer" onclick="setRole('Customer')">حساب
+                زبون</button>
+            <button type="button" class="role-btn" id="btnTailor" onclick="setRole('Tailor')">حساب خياط</button>
+        </div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="input-group">
+                <label>الاسم الكامل</label>
+                <div class="input-wrapper">
+                    <input type="text" id="nameInput" placeholder="أدخل اسمك الكامل" required>
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>البريد الإلكتروني</label>
+                <div class="input-wrapper">
+                    <input type="email" id="emailInput" placeholder="example@domain.com" dir="ltr"
+                        style="text-align: left;" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>رقم الهاتف</label>
+                <div class="input-wrapper">
+                    <input type="tel" id="phoneInput" placeholder="05xxxxxxxx" dir="ltr" style="text-align: left;"
+                        required>
+                    <i class="fas fa-phone"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>كلمة المرور</label>
+                <div class="input-wrapper">
+                    <input type="password" id="passInput" placeholder="••••••••" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>تأكيد كلمة المرور</label>
+                <div class="input-wrapper">
+                    <input type="password" id="confirmPassInput" placeholder="••••••••" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+
+            <div id="registerError"
+                style="display:none; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fca5a5; padding: 10px; border-radius: 8px; font-size: 13px; margin-bottom: 15px; text-align: center;">
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fas fa-user-plus" style="margin-left: 8px;"></i>إنشاء
+                الحساب</button>
+        </form>
+
+        <div class="login-link">
+            لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a>
+        </div>
+    </div>
+
+    <script>
+        let selectedRole = 'Customer';
+
+        function setRole(role) {
+            selectedRole = role;
+            document.getElementById('btnCustomer').classList.toggle('active', role === 'Customer');
+            document.getElementById('btnTailor').classList.toggle('active', role === 'Tailor');
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const pass = document.getElementById('passInput').value.trim();
+            const confirmPass = document.getElementById('confirmPassInput').value.trim();
+            const errorDiv = document.getElementById('registerError');
+
+            if (pass !== confirmPass) {
+                errorDiv.innerText = 'كلمات المرور غير متطابقة';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name, email: email, password: pass })
+                });
+
+                if (response.ok) {
+                    alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.');
+                    window.location.href = 'login.html';
+                } else {
+                    const data = await response.json();
+                    errorDiv.innerText = data.message || 'حدث خطأ أثناء إنشاء الحساب.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                alert('تم إنشاء الحساب بنجاح! جاري التوجيه لصفحة الدخول.');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

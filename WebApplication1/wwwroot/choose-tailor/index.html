@@ -1,0 +1,2131 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - قائمة الخياطين</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي */
+        .main-wrapper {
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+
+        /* 3. الهيدر الذهبي الممتد */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 40px 0;
+        }
+
+        .header-title {
+            font-size: 34px;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 4. شبكة المحلات والخياطين */
+        .grid-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 40px;
+            flex: 1;
+        }
+
+        /* 5. تصميم بطاقات الخياطين الفاخرة */
+        .luxury-card {
+            background: #161616;
+            border: 1px solid rgba(219, 195, 139, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            width: 100%;
+        }
+
+        .luxury-card:hover {
+            transform: translateY(-8px);
+            border-color: #dbc38b;
+            background: #1c1c1c;
+            box-shadow: 0 20px 45px rgba(219, 195, 139, 0.25);
+        }
+
+        .card-text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 15px;
+            color: #a0a0a0;
+        }
+
+        /* 3.1 تبويبات التصفية (Filter Tabs) */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: -15px 0 35px 0;
+            padding: 0 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #181818;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn:hover {
+            border-color: #dbc38b;
+            color: #dbc38b;
+            transform: translateY(-2px);
+            background: #222222;
+        }
+
+        .filter-btn.active {
+            background: #dbc38b;
+            color: #000000;
+            border-color: #dbc38b;
+            box-shadow: 0 0 25px rgba(219, 195, 139, 0.45);
+        }
+
+        /* شارات الفئات داخل البطاقة */
+        .category-badge {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 12px;
+            width: fit-content;
+            margin-top: 6px;
+        }
+
+        .badge-men {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .badge-women {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+        }
+
+        .badge-suits {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        /* شريط وسائل التواصل المباشر (أيقونات SVG دائرية فائقة الدقة) */
+        .card-actions-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: rgba(37, 211, 102, 0.15);
+            border-color: rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background: #25d366;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-whatsapp:hover svg path:last-child {
+            fill: #ffffff;
+        }
+
+        .btn-telegram {
+            background: rgba(34, 158, 217, 0.15);
+            border-color: rgba(34, 158, 217, 0.4);
+        }
+
+        .btn-telegram:hover {
+            background: #229ed9;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(34, 158, 217, 0.5);
+        }
+
+        .btn-telegram:hover svg path {
+            fill: #ffffff;
+        }
+
+        .btn-phone {
+            background: rgba(219, 195, 139, 0.15);
+            border-color: rgba(219, 195, 139, 0.4);
+        }
+
+        .btn-phone:hover {
+            background: #dbc38b;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(219, 195, 139, 0.5);
+        }
+
+        .btn-phone:hover svg path {
+            fill: #111111;
+        }
+
+        .btn-sms {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-sms:hover {
+            background: #a855f7;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-sms:hover svg path {
+            fill: #ffffff;
+        }
+
+        .btn-email {
+            background: rgba(96, 165, 250, 0.15);
+            border-color: rgba(96, 165, 250, 0.4);
+        }
+
+        .btn-email:hover {
+            background: #60a5fa;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.5);
+        }
+
+        .btn-email:hover svg path {
+            fill: #ffffff;
+        }
+
+        /* زر المحادثة المباشرة مع الخياط داخل التطبيق */
+        .btn-chat {
+            background: rgba(219, 195, 139, 0.25);
+            border-color: #dbc38b;
+        }
+
+        .btn-chat:hover {
+            background: #dbc38b;
+            transform: translateY(-3px) scale(1.12);
+            box-shadow: 0 6px 20px rgba(219, 195, 139, 0.6);
+        }
+
+        .btn-chat:hover svg path {
+            fill: #000000;
+        }
+
+        /* نافذة الدردشة المباشرة مع الخياط Modal */
+        .chat-modal {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 430px;
+            max-width: 92vw;
+            height: 560px;
+            max-height: 85vh;
+            background: #141414;
+            border: 2px solid #dbc38b;
+            border-radius: 24px;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            animation: slideUpChat 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes slideUpChat {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .chat-modal.open {
+            display: flex;
+        }
+
+        .chat-header {
+            background: #1e1e1e;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(219, 195, 139, 0.3);
+        }
+
+        .chat-tailor-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            background: #dbc38b;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .chat-tailor-info h3 {
+            font-size: 17px;
+            color: #fff;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .chat-status {
+            font-size: 12px;
+            color: #34d399;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #34d399;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .close-chat-btn {
+            background: none;
+            border: none;
+            color: #ff5555;
+            font-size: 26px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #0d0d0d;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .chat-bubble.customer {
+            align-self: flex-start;
+            background: #dbc38b;
+            color: #000;
+            font-weight: 600;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble.tailor {
+            align-self: flex-end;
+            background: #242424;
+            color: #fff;
+            border: 1px solid #333;
+            border-bottom-left-radius: 4px;
+        }
+
+        .msg-time {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+            text-align: left;
+        }
+
+        .chat-quick-replies {
+            display: flex;
+            gap: 8px;
+            padding: 10px 15px;
+            overflow-x: auto;
+            background: #141414;
+            border-top: 1px solid #222;
+        }
+
+        .quick-chip {
+            background: #1e1e1e;
+            border: 1px solid rgba(219, 195, 139, 0.4);
+            color: #dbc38b;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-chip:hover {
+            background: #dbc38b;
+            color: #000;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 12px 15px;
+            background: #181818;
+            gap: 10px;
+            border-top: 1px solid #222;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-footer input:focus {
+            border-color: #dbc38b;
+        }
+
+        .send-msg-btn {
+            background: #dbc38b;
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+        }
+
+        .send-msg-btn:hover {
+            background: #c4a768;
+        }
+
+        .card-img-frame {
+            width: 130px;
+            height: 130px;
+            border-radius: 25px;
+            border: 2px solid #dbc38b;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1f1d17 0%, #0d0c0a 100%);
+            flex-shrink: 0;
+            box-shadow: 0 8px 25px rgba(219, 195, 139, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .luxury-card:hover .card-img-frame {
+            border-color: #f5d796;
+            box-shadow: 0 10px 30px rgba(219, 195, 139, 0.5);
+            transform: scale(1.06);
+        }
+
+        .card-img-frame svg,
+        .card-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 6. القائمة الجانبية (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 14px;
+            background: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #252525;
+            color: #dbc38b;
+            padding-right: 22px;
+        }
+
+        .drawer-menu li a.highlight-menu {
+            border: 1px solid #dbc38b;
+            background: rgba(219, 195, 139, 0.1);
+            color: #dbc38b;
+        }
+
+        .drawer-menu li a.highlight-menu:hover {
+            background: #dbc38b;
+            color: #000000;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                background-color: #0d0d0d;
+                margin-right: 0;
+                width: 100%;
+                padding-bottom: 120px;
+            }
+
+            .web-sidebar {
+                bottom: 0;
+                top: auto;
+                right: 0;
+                width: 100%;
+                height: 75px;
+                flex-direction: row;
+                padding: 0 20px;
+                border-top: 1px solid #222222;
+                border-left: none;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .sidebar-item.active::before {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة الجانبية (الدراور) -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item" onclick="window.location.href='/customer-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/choose-tailor.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                    <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                    <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                </svg>
+                <span>الخياطين</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/app-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <!-- 2. منطقة المحتوى الرئيسي -->
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">قائمة الخياطين والمحلات المعتمدة</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- أزرار تصفية الأقسام (أثواب / بدلات / نسائي / الكل) -->
+        <div class="filter-tabs">
+            <button class="filter-btn active" onclick="filterTailors('all', this)">الكل (جميع الخياطين)</button>
+            <button class="filter-btn" onclick="filterTailors('women', this)">👗 خياطة نسائية وأتيليهات</button>
+            <button class="filter-btn" onclick="filterTailors('men', this)">👔 أثواب رجالية</button>
+            <button class="filter-btn" onclick="filterTailors('suits', this)">💼 خياطة بدلات رسمية</button>
+        </div>
+
+        <!-- شبكة بطاقات الخياطين والمشاغل -->
+        <main class="grid-container" id="tailorsGrid">
+
+            <!-- خياط 1 (رجالي) -->
+            <div class="luxury-card" data-category="men" onclick="window.location.href='/men-thobes.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">الناصر للخياطة</h2>
+                    <p class="card-subtitle">أثواب رجالية - أثواب وقصات فريدة</p>
+                    <span class="category-badge badge-men">👔 خياطة رجالية</span>
+                    <div class="card-actions-bar">
+                        <a href="javascript:void(0)" class="contact-btn btn-chat"
+                            onclick="openChatModal(1, 'الناصر للخياطة'); event.stopPropagation();"
+                            title="محادثة مباشرة داخل التطبيق">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H18L22 22V4C22 2.9 21.1 2 20 2ZM6 9H18V11H6V9ZM14 14H6V12H14V14ZM18 8H6V6H18V8Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/967771234567?text=مرحباً%20الناصر%20للخياطة،%20أود%20الاستفسار%20عن%20التفصيل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967771234567" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967771234567" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967771234567?body=مرحباً%20الناصر%20للخياطة،%20أود%20الاستفسار%20عن%20التفصيل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:alnasser@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="54" stroke="#dbc38b" stroke-width="2" stroke-dasharray="4 2" />
+                        <circle cx="60" cy="60" r="46" fill="#181818" stroke="#dbc38b" stroke-width="1.5" />
+                        <path d="M42 42L78 78M78 42L42 78" stroke="#dbc38b" stroke-width="3.5" stroke-linecap="round" />
+                        <circle cx="39" cy="39" r="6" stroke="#dbc38b" stroke-width="2" />
+                        <circle cx="81" cy="39" r="6" stroke="#dbc38b" stroke-width="2" />
+                        <text x="60" y="98" fill="#dbc38b" font-size="12" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الناصر</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- مشغل نسائي 1 -->
+            <div class="luxury-card" data-category="women" onclick="window.location.href='/women-dresses.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">دار الملكة للخياطة النسائية</h2>
+                    <p class="card-subtitle">خياطة نسائية - فساتين سهرة، عبايات، وجلابيات راقية</p>
+                    <span class="category-badge badge-women">👗 خياطة نسائية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967777112233?text=مرحباً%20دار%20الملكة،%20أود%20الاستفسار%20عن%20خياطة%20الفساتين"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967777112233" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967777112233" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967777112233?body=مرحباً%20دار%20الملكة،%20أود%20الاستفسار%20عن%20خياطة%20الفساتين"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:malika@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المشغل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="54" stroke="#f472b6" stroke-width="2" />
+                        <circle cx="60" cy="60" r="46" fill="#181818" stroke="#dbc38b" stroke-width="1.5" />
+                        <path d="M40 45L48 55L60 38L72 55L80 45L76 75H44L40 45Z" fill="url(#goldGradQueen)"
+                            stroke="#dbc38b" stroke-width="2" />
+                        <text x="60" y="96" fill="#f472b6" font-size="12" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">دار الملكة</text>
+                        <defs>
+                            <linearGradient id="goldGradQueen" x1="40" y1="38" x2="80" y2="75"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#dbc38b" />
+                                <stop offset="1" stop-color="#f472b6" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 2 (رجالي) -->
+            <div class="luxury-card" data-category="men" onclick="window.location.href='/men-thobes.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">خياطة الأناقة والتميز</h2>
+                    <p class="card-subtitle">عمل ثياب رجالية ودرعات وسدريات بأفضل الأقمشة</p>
+                    <span class="category-badge badge-men">👔 خياطة رجالية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967772233445?text=مرحباً%20الأناقة%20والتميز،%20أود%20الاستفسار%20عن%20التفصيل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967772233445" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967772233445" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967772233445?body=مرحباً%20الأناقة%20والتميز،%20أود%20الاستفسار%20عن%20التفصيل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:anaqa@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2" />
+                        <path d="M75 30L45 80" stroke="#dbc38b" stroke-width="3.5" stroke-linecap="round" />
+                        <path d="M75 30C78 27 82 27 83 30C84 33 81 37 77 37" stroke="#dbc38b" stroke-width="2" />
+                        <path d="M80 33C65 45 40 40 30 55C20 70 40 85 55 92" stroke="#60a5fa" stroke-width="2.5"
+                            stroke-dasharray="3 2" fill="none" />
+                        <text x="60" y="100" fill="#dbc38b" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الأناقة والتميز</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- مشغل نسائي 2 -->
+            <div class="luxury-card" data-category="women" onclick="window.location.href='/women-dresses.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">مشغل الحرير للعبايات والتفصيل</h2>
+                    <p class="card-subtitle">متخصصون في تفصيل العبايات والجلابيات والفساتين الخليجية</p>
+                    <span class="category-badge badge-women">👗 خياطة نسائية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967773344556?text=مرحباً%20مشغل%20الحرير،%20أود%20الاستفسار%20عن%20تفصيل%20العبايات"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967773344556" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967773344556" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967773344556?body=مرحباً%20مشغل%20الحرير،%20أود%20الاستفسار%20عن%20تفصيل%20العبايات"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:hareer@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المشغل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#f472b6" stroke-width="2" />
+                        <rect x="42" y="36" width="36" height="44" rx="6" stroke="#dbc38b" stroke-width="2"
+                            fill="#252525" />
+                        <path d="M42 46H78M42 54H78M42 62H78M42 70H78" stroke="#f472b6" stroke-width="2.5" />
+                        <text x="60" y="99" fill="#f472b6" font-size="12" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">مشغل الحرير</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 3 (رجالي) -->
+            <div class="luxury-card" data-category="men" onclick="window.location.href='/men-thobes.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">الذهبي للمقاسات</h2>
+                    <p class="card-subtitle">خياطة أثواب فاخرة حسب الطلب والمقاسات</p>
+                    <span class="category-badge badge-men">👔 خياطة رجالية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967774455667?text=مرحباً%20الذهبي%20للمقاسات،%20أود%20الاستفسار%20عن%20التفصيل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967774455667" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967774455667" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967774455667?body=مرحباً%20الذهبي%20للمقاسات،%20أود%20الاستفسار%20عن%20التفصيل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:dahabi@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2.5" />
+                        <circle cx="60" cy="52" r="26" stroke="#dbc38b" stroke-width="3" stroke-dasharray="4 2" />
+                        <path d="M50 45L60 35L70 45V65H50V45Z" fill="#dbc38b" />
+                        <text x="60" y="98" fill="#dbc38b" font-size="12" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الذهبي</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- مشغل نسائي 3 -->
+            <div class="luxury-card" data-category="women" onclick="window.location.href='/women-dresses.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">أتيليه الأناقة النسائي</h2>
+                    <p class="card-subtitle">تفصيل وتصميم فساتين المناسبات والأعراس وأرقى الموديلات</p>
+                    <span class="category-badge badge-women">👗 خياطة نسائية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967775566778?text=مرحباً%20أتيليه%20الأناقة،%20أود%20الاستفسار%20عن%20فساتين%20المناسبات"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967775566778" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967775566778" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967775566778?body=مرحباً%20أتيليه%20الأناقة،%20أود%20الاستفسار%20عن%20فساتين%20المناسبات"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:atelie@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المشغل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2" />
+                        <path d="M60 32C60 28 64 26 66 29C68 32 64 36 60 36V40L35 53H85L60 40Z" stroke="#f472b6"
+                            stroke-width="2.5" stroke-linejoin="round" />
+                        <path d="M42 53L36 80H84L78 53" stroke="#dbc38b" stroke-width="2" fill="none" />
+                        <text x="60" y="98" fill="#f472b6" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">أتيليه الأناقة</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 4 (رجالي) -->
+            <div class="luxury-card" data-category="men" onclick="window.location.href='/men-thobes.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">مركز الفريد للخياطة</h2>
+                    <p class="card-subtitle">متخصصون في الأثواب الخليجية والمطرزة بدقة عالية</p>
+                    <span class="category-badge badge-men">👔 خياطة رجالية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967776677889?text=مرحباً%20مركز%20الفريد،%20أود%20الاستفسار%20عن%20التفصيل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967776677889" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967776677889" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967776677889?body=مرحباً%20مركز%20الفريد،%20أود%20الاستفسار%20عن%20التفصيل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:fareed@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 22L88 34V60C88 78 76 92 60 98C44 92 32 78 32 60V34L60 22Z" fill="#181818"
+                            stroke="#dbc38b" stroke-width="2.5" />
+                        <path d="M50 42L70 70M70 42L50 70" stroke="#dbc38b" stroke-width="3" stroke-linecap="round" />
+                        <text x="60" y="85" fill="#dbc38b" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الفريد</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- مشغل نسائي 4 -->
+            <div class="luxury-card" data-category="women" onclick="window.location.href='/women-dresses.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">دار المخمل للخياطة النسائية</h2>
+                    <p class="card-subtitle">خياطة وتطريز أزياء نسائية فاخرة بدقة عالية حسب المقاسات</p>
+                    <span class="category-badge badge-women">👗 خياطة نسائية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967777788990?text=مرحباً%20دار%20المخمل،%20أود%20الاستفسار%20عن%20التفصيل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967777788990" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967777788990" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967777788990?body=مرحباً%20دار%20المخمل،%20أود%20الاستفسار%20عن%20التفصيل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:makhmal@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المشغل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#f472b6" stroke-width="2" />
+                        <path d="M60 35C66 45 78 45 78 55C78 65 66 65 60 75C54 65 42 65 42 55C42 45 54 45 60 35Z"
+                            fill="url(#velvetGradMakhmal)" stroke="#dbc38b" stroke-width="1.5" />
+                        <text x="60" y="96" fill="#f472b6" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">دار المخمل</text>
+                        <defs>
+                            <linearGradient id="velvetGradMakhmal" x1="42" y1="35" x2="78" y2="75"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#f472b6" />
+                                <stop offset="1" stop-color="#9d174d" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 5 (بدلات رسمية) -->
+            <div class="luxury-card" data-category="suits" onclick="window.location.href='/men-suits.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">معرض السفير لتفصيل البدلات</h2>
+                    <p class="card-subtitle">متخصصون في تفصيل البدلات الرسمية وبدل الاجتماعات والدبلوماسية</p>
+                    <span class="category-badge badge-suits">💼 بدلات رسمية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967778899001?text=مرحباً%20معرض%20السفير،%20أود%20الاستفسار%20عن%20تفصيل%20البدلات"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967778899001" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967778899001" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967778899001?body=مرحباً%20معرض%20السفير،%20أود%20الاستفسار%20عن%20تفصيل%20البدلات"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:safeer@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#34d399" stroke-width="2" />
+                        <path d="M45 42H75L60 78L45 42Z" fill="url(#suitGradSafeer)" stroke="#dbc38b"
+                            stroke-width="1.5" />
+                        <path d="M55 42L60 55L65 42" stroke="#34d399" stroke-width="2" />
+                        <text x="60" y="98" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">السفير</text>
+                        <defs>
+                            <linearGradient id="suitGradSafeer" x1="45" y1="42" x2="75" y2="78"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1f2937" />
+                                <stop offset="1" stop-color="#111827" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 6 (بدل عرسان ورسميات) -->
+            <div class="luxury-card" data-category="suits" onclick="window.location.href='/men-suits.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">دار البدلة الملكية للعرسان</h2>
+                    <p class="card-subtitle">تفصيل بدل عرسان وتكسيدو ملكي بأرقى الأقمشة الإيطالية والإنجليزية</p>
+                    <span class="category-badge badge-suits">👔 بدل عرسان وتكسيدو</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967779900112?text=مرحباً%20دار%20البدلة%20الملكية،%20أود%20الاستفسار%20عن%20بدل%20العرسان"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967779900112" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967779900112" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967779900112?body=مرحباً%20دار%20البدلة%20الملكية،%20أود%20الاستفسار%20عن%20بدل%20العرسان"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:royal.suits@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2.5" />
+                        <path d="M40 38L60 48L80 38V72L60 84L40 72V38Z" fill="#111827" stroke="#dbc38b"
+                            stroke-width="2" />
+                        <path d="M54 45L60 56L66 45" stroke="#dbc38b" stroke-width="2" />
+                        <text x="60" y="100" fill="#dbc38b" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الملكية</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 7 (بدلات رسمية) -->
+            <div class="luxury-card" data-category="suits" onclick="window.location.href='/men-suits.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">مركز الرواد للبدلات الرسمية</h2>
+                    <p class="card-subtitle">خياطة وتفصيل بدلات العمل الرسمية والجاكيتات الفاخرة</p>
+                    <span class="category-badge badge-suits">💼 بدلات رسمية</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967770011223?text=مرحباً%20مركز%20الرواد،%20أود%20الاستفسار%20عن%20بدلات%20العمل"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967770011223" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967770011223" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967770011223?body=مرحباً%20مركز%20الرواد،%20أود%20الاستفسار%20عن%20بدلات%20العمل"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:rowad@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#60a5fa" stroke-width="2" />
+                        <path d="M48 40H72L60 75L48 40Z" stroke="#60a5fa" stroke-width="2" fill="#1f2937" />
+                        <text x="60" y="98" fill="#60a5fa" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">الرواد</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- خياط 8 (تكسيدو وبدل أعراس) -->
+            <div class="luxury-card" data-category="suits" onclick="window.location.href='/men-suits.html'">
+                <div class="card-text-group">
+                    <h2 class="card-title">مشغل العريس للبدلات والتكسيدو</h2>
+                    <p class="card-subtitle">متخصصون في أرقى بدل الأعراس والحفلات الرسمية والتفصيل المباشر</p>
+                    <span class="category-badge badge-suits">👔 بدل أعراس وتكسيدو</span>
+                    <div class="card-actions-bar">
+                        <a href="https://wa.me/967771122334?text=مرحباً%20مشغل%20العريس،%20أود%20الاستفسار%20عن%20التكسيدو"
+                            target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();"
+                            title="تواصل عبر الواتساب">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C17.19 21.67 21.67 17.19 21.67 11.67C21.67 6.15 17.19 2 12 2Z"
+                                    fill="#25D366" />
+                                <path
+                                    d="M16.54 14.28C16.29 14.16 15.06 13.55 14.83 13.47C14.6 13.39 14.43 13.35 14.26 13.6C14.09 13.85 13.6 14.43 13.45 14.6C13.3 14.77 13.15 14.79 12.9 14.67C12.65 14.55 11.84 14.28 10.88 13.43C10.13 12.76 9.62 11.93 9.47 11.68C9.32 11.43 9.45 11.3 9.58 11.17C9.69 11.06 9.83 10.88 9.95 10.74C10.07 10.6 10.11 10.5 10.19 10.33C10.27 10.16 10.23 10.02 10.17 9.9C10.11 9.78 9.62 8.58 9.41 8.08C9.21 7.6 9 7.67 8.85 7.66C8.71 7.65 8.54 7.65 8.37 7.65C8.2 7.65 7.93 7.71 7.7 7.96C7.47 8.21 6.83 8.81 6.83 10.03C6.83 11.25 7.72 12.43 7.84 12.59C7.96 12.75 9.59 15.25 12.08 16.33C12.67 16.59 13.12 16.74 13.48 16.85C14.07 17.04 14.61 17.01 15.04 16.95C15.52 16.88 16.52 16.35 16.73 15.76C16.94 15.17 16.94 14.67 16.88 14.57C16.82 14.47 16.67 14.41 16.42 14.29L16.54 14.28Z"
+                                    fill="white" />
+                            </svg>
+                        </a>
+                        <a href="https://t.me/+967771122334" target="_blank" class="contact-btn btn-telegram"
+                            onclick="event.stopPropagation();" title="تواصل عبر تليجرام">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.68 3.66C21.41 3.2 20.89 2.95 20.36 3.04L2.83 6.1C2.26 6.2 1.83 6.63 1.76 7.2C1.69 7.77 2.01 8.3 2.53 8.54L8.14 11.16L17.7 5.25L10.96 12.48L15.34 19.34C15.62 19.78 16.11 20.03 16.63 20.03C16.73 20.03 16.84 20.02 16.94 19.99C17.59 19.8 18 19.26 18.06 18.62L21.96 4.97C22.1 4.49 21.95 3.98 21.68 3.66Z"
+                                    fill="#229ED9" />
+                            </svg>
+                        </a>
+                        <a href="tel:+967771122334" class="contact-btn btn-phone" onclick="event.stopPropagation();"
+                            title="اتصال هاتفي مباشر">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.01 15.38C18.78 15.38 17.59 15.18 16.48 14.82C16.13 14.7 15.74 14.79 15.47 15.06L13.27 17.77C10.26 16.29 7.71 13.75 6.22 10.73L8.92 8.52C9.2 8.25 9.29 7.86 9.18 7.51C8.81 6.4 8.62 5.21 8.62 3.98C8.62 3.44 8.18 3 7.64 3H4.12C3.58 3 3 3.44 3 3.98C3 13.37 10.63 21 20.02 21C20.56 21 21 20.56 21 20.02V16.5C21 15.96 20.55 15.52 20.01 15.38Z"
+                                    fill="#dbc38b" />
+                            </svg>
+                        </a>
+                        <a href="sms:+967771122334?body=مرحباً%20مشغل%20العريس،%20أود%20الاستفسار%20عن%20التكسيدو"
+                            class="contact-btn btn-sms" onclick="event.stopPropagation();" title="إرسال رسالة نصية SMS">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM9 11H7V9H9V11ZM13 11H11V9H13V11ZM17 11H15V9H17V11Z"
+                                    fill="#a855f7" />
+                            </svg>
+                        </a>
+                        <a href="mailto:arees@maqas.com" class="contact-btn btn-email"
+                            onclick="event.stopPropagation();" title="إرسال إيميل">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                                    fill="#60a5fa" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-img-frame" title="شعار المحل">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="52" fill="#181818" stroke="#f472b6" stroke-width="2" />
+                        <path d="M42 42L60 52L78 42V70L60 80L42 70V42Z" fill="#111827" stroke="#dbc38b"
+                            stroke-width="1.5" />
+                        <text x="60" y="98" fill="#dbc38b" font-size="11" font-weight="bold" text-anchor="middle"
+                            font-family="'Cairo', sans-serif">العريس</text>
+                    </svg>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>مقاسك</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/customer-dashboard.html">
+                    <span>الرئيسية</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html" class="highlight-menu">
+                    <span>📑 تقارير التفصيل المحفوظة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html">
+                    <span>طلباتي</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 16 14"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/payment.html">
+                    <span>طريقة الدفع</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/ready-sizes.html">
+                    <span>حفظ</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('تم تنفيذ العملية')">
+                    <span>حذف</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/choose-tailor.html">
+                    <span>قائمة الخياطين</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('لا توجد إشعارات جديدة حالياً')">
+                    <span>الاشعارات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- نافذة الدردشة المباشرة التفاعلية مع الخياط -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header">
+            <div class="chat-tailor-info">
+                <div class="chat-avatar"><i class="fa-solid fa-scissors"></i></div>
+                <div>
+                    <h3 id="chatTailorName">الناصر للخياطة</h3>
+                    <span class="chat-status"><span class="status-dot"></span> متصل الآن</span>
+                </div>
+            </div>
+            <button class="close-chat-btn" onclick="closeChatModal()" title="إغلاق">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <!-- يتم تحميل الرسائل ديناميكياً -->
+        </div>
+        <div class="chat-quick-replies">
+            <button class="quick-chip" onclick="sendQuickReply('مرحباً، أود الاستفسار عن التفصيل والمقاسات')">💬 استفسار
+                عن مقاس</button>
+            <button class="quick-chip" onclick="sendQuickReply('كم هي المدة المستغرقة لتجهيز الثوب؟')">⏱ مدة
+                التجهيز</button>
+            <button class="quick-chip" onclick="sendQuickReply('هل القماش متوفر لديكم في المحل؟')">🧵 تزويد
+                القماش</button>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="اكتب رسالتك للخياط هنا..."
+                onkeypress="if(event.key==='Enter') sendMessage()">
+            <button class="send-msg-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> إرسال</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function filterTailors(category, btnElement) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.luxury-card');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* ووظائف المحادثة والدردشة بين العميل والخياط */
+        let currentTailorId = 1;
+        let currentCustomerId = 1;
+        let currentTailorName = 'الناصر للخياطة';
+
+        function openChatModal(tailorId, tailorName) {
+            currentTailorId = tailorId || 1;
+            currentTailorName = tailorName || 'الخياط المحترف';
+            document.getElementById('chatTailorName').innerText = currentTailorName;
+            document.getElementById('chatModal').classList.add('open');
+            loadChatMessages();
+        }
+
+        function closeChatModal() {
+            document.getElementById('chatModal').classList.remove('open');
+        }
+
+        async function loadChatMessages() {
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = '<div style="text-align:center; color:#888; margin-top:20px;">جاري تحميل المحادثة...</div>';
+
+            try {
+                const response = await fetch(`/api/Messages?customerId=${currentCustomerId}&tailorId=${currentTailorId}`);
+                if (response.ok) {
+                    const messages = await response.json();
+                    if (messages.length === 0) {
+                        fallbackLocalChat();
+                    } else {
+                        chatBody.innerHTML = '';
+                        messages.forEach(msg => {
+                            const isCustomer = msg.senderRole === 'Customer';
+                            const timeStr = new Date(msg.sentAt).toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit' });
+                            const bubble = document.createElement('div');
+                            bubble.className = `chat-bubble ${isCustomer ? 'customer' : 'tailor'}`;
+                            bubble.innerHTML = `
+                                <div>${msg.messageText}</div>
+                                <span class="msg-time">${timeStr}</span>
+                            `;
+                            chatBody.appendChild(bubble);
+                        });
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    }
+                } else {
+                    fallbackLocalChat();
+                }
+            } catch (e) {
+                fallbackLocalChat();
+            }
+        }
+
+        function fallbackLocalChat() {
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = `
+                <div class="chat-bubble tailor">
+                    <div>مرحباً بك عزيزي العميل! أنا ${currentTailorName}. كيف يمكنني مساعدتك في استفسارك عن المقاسات وتأكيد طلبك اليوم؟</div>
+                    <span class="msg-time">الآن</span>
+                </div>
+            `;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatBody = document.getElementById('chatBody');
+            const timeStr = new Date().toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit' });
+
+            const customerBubble = document.createElement('div');
+            customerBubble.className = 'chat-bubble customer';
+            customerBubble.innerHTML = `<div>${text}</div><span class="msg-time">${timeStr}</span>`;
+            chatBody.appendChild(customerBubble);
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                await fetch('/api/Messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        senderId: currentCustomerId,
+                        senderRole: 'Customer',
+                        receiverId: currentTailorId,
+                        messageText: text
+                    })
+                });
+            } catch (e) {
+                console.log('Message stored locally', e);
+            }
+
+            setTimeout(() => {
+                const tailorReply = document.createElement('div');
+                tailorReply.className = 'chat-bubble tailor';
+                tailorReply.innerHTML = `<div>أهلاً بك! تم استلام استفسارك بنجاح وسنقوم بمراجعة التفاصيل والرد فوراً.</div><span class="msg-time">${new Date().toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit' })}</span>`;
+                chatBody.appendChild(tailorReply);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1200);
+        }
+
+        function sendQuickReply(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+
+        // تحميل وعرض المحل والمنتجات المرسلة من الخياط ديناميكياً
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCustomTailorsAndProducts();
+        });
+
+        function loadCustomTailorsAndProducts() {
+            const customShop = JSON.parse(localStorage.getItem('customTailorShop'));
+            const customProducts = JSON.parse(localStorage.getItem('customTailorProducts')) || [];
+            const grid = document.getElementById('tailorsGrid');
+
+            if (customShop && grid) {
+                const categoryText = customShop.category === 'women' ? '👗 خياطة نسائية' :
+                    customShop.category === 'suits' ? '💼 بدلات رسمية' : '👔 خياطة رجالية';
+                const badgeClass = customShop.category === 'women' ? 'badge-women' :
+                    customShop.category === 'suits' ? 'badge-suits' : 'badge-men';
+                const pageLink = customShop.category === 'women' ? 'women-dresses.html' :
+                    customShop.category === 'suits' ? 'men-suits.html' : 'men-thobes.html';
+
+                const newCardHTML = `
+                    <div class="luxury-card" data-category="${customShop.category}" onclick="window.location.href='/${pageLink}'" style="border: 2px solid #dbc38b; background: #1f1f1f;">
+                        <div class="card-text-group">
+                            <h2 class="card-title" style="color: #dbc38b;">${customShop.name} ✨ <span style="font-size:12px; background:#dbc38b; color:#000; padding:2px 8px; border-radius:10px; margin-right:6px;">محل جديد مضاف</span></h2>
+                            <p class="card-subtitle">${customShop.desc}</p>
+                            <span class="category-badge ${badgeClass}">${categoryText}</span>
+                            
+                            ${customProducts.length > 0 ? `
+                                <div style="margin-top:10px; font-size:13px; color:#fff; font-weight:bold;">
+                                    🛍️ منتجات المحل المعروضة: 
+                                    <span style="color:#dbc38b;">${customProducts.map(p => p.title + ' (' + p.price + ')').join(' • ')}</span>
+                                </div>
+                            ` : ''}
+
+                            <div class="card-actions-bar">
+                                <a href="javascript:void(0)" class="contact-btn btn-chat"
+                                    onclick="openChatModal(99, '${customShop.name}'); event.stopPropagation();"
+                                    title="محادثة مباشرة">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H18L22 22V4C22 2.9 21.1 2 20 2ZM6 9H18V11H6V9ZM14 14H6V12H14V14ZM18 8H6V6H18V8Z" fill="#dbc38b"/>
+                                    </svg>
+                                </a>
+                                <a href="https://wa.me/${customShop.phone || '771234567'}?text=مرحباً%20${encodeURIComponent(customShop.name)}"
+                                    target="_blank" class="contact-btn btn-whatsapp" onclick="event.stopPropagation();">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 13.81 2.49 15.5 3.35 16.97L2.05 21.72L6.92 20.44C8.35 21.23 9.98 21.67 11.67 21.67C21.67 17.19 21.67 11.67 21.67 11.67C21.67 6.15 17.19 2 12 2Z" fill="#25D366"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="${customShop.img}" alt="${customShop.name}" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400'">
+                        </div>
+                    </div>
+                `;
+
+                grid.insertAdjacentHTML('afterbegin', newCardHTML);
+            }
+        }
+    </script>
+</body>
+
+</html>

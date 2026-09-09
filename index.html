@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - طلباتي التفصيل والتقارير</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي */
+        .main-wrapper {
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+
+        /* 3. الهيدر الذهبي الممتد */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 40px 0;
+        }
+
+        .header-title {
+            font-size: 34px;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 4. شريط أدوات محرك البحث وإنشاء طلب جديد */
+        .top-controls-container {
+            width: 100%;
+            padding: 0 40px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .search-box-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-field {
+            width: 100%;
+            background: #111111;
+            border: 2px solid rgba(219, 195, 139, 0.4);
+            border-radius: 20px;
+            padding: 14px 48px 14px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            line-height: 1.5;
+        }
+
+        .search-input-field:focus {
+            border-color: #dbc38b;
+            box-shadow: 0 0 15px rgba(219, 195, 139, 0.4);
+            background: #161616;
+        }
+
+        .search-icon-btn {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #dbc38b;
+            font-size: 18px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .create-order-action-btn {
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 20px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(219, 195, 139, 0.35);
+            white-space: nowrap;
+        }
+
+        .create-order-action-btn:hover {
+            background: #c4a768;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(219, 195, 139, 0.5);
+        }
+
+        /* 5. شبكة البطاقات بعمودين لتغطية الفراغ الجانبي تماماً مثل صفحة الخياطين */
+        .grid-2-col-orders {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 40px;
+            flex: 1;
+        }
+
+        /* 6. تصميم بطاقات الطلبات الفاخرة ذات اللون الداكن والإطار الذهبي */
+        .order-luxury-card {
+            background: #111111;
+            border: 2px solid rgba(219, 195, 139, 0.3);
+            border-radius: 25px;
+            padding: 25px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            min-height: 220px;
+            position: relative;
+        }
+
+        .order-luxury-card:hover {
+            transform: translateY(-6px);
+            border-color: #dbc38b;
+            background: #181818;
+            box-shadow: 0 25px 50px rgba(219, 195, 139, 0.35);
+        }
+
+        .order-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .order-profile-group {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .order-img-frame {
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
+            border: 2px solid #dbc38b;
+            overflow: hidden;
+            background: #252525;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(219, 195, 139, 0.25);
+        }
+
+        .order-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-text-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .client-name-tag {
+            font-size: 14px;
+            color: #dbc38b;
+            font-weight: 700;
+        }
+
+        .order-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .order-subtitle {
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+
+        .status-badge-btn {
+            background: rgba(219, 195, 139, 0.15);
+            border: 1px solid #dbc38b;
+            color: #dbc38b;
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            align-self: flex-start;
+        }
+
+        /* أزرار الإجراءات السريعة (تعديل - حذف - التقرير) */
+        .card-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #222222;
+        }
+
+        .report-main-btn {
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .report-main-btn:hover {
+            background: #c4a768;
+            transform: scale(1.03);
+        }
+
+        .action-icon-btn {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            color: #ffffff;
+            padding: 10px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .action-icon-btn.edit-btn {
+            border-color: rgba(219, 195, 139, 0.5);
+            color: #dbc38b;
+        }
+
+        .action-icon-btn.edit-btn i {
+            color: #dbc38b;
+            font-size: 15px;
+        }
+
+        .action-icon-btn.edit-btn:hover {
+            background: #dbc38b;
+            border-color: #dbc38b;
+            color: #000000;
+        }
+
+        .action-icon-btn.edit-btn:hover i,
+        .action-icon-btn.edit-btn:hover svg {
+            color: #000000;
+            stroke: #000000;
+        }
+
+        .action-icon-btn.delete-btn {
+            border-color: rgba(255, 85, 85, 0.5);
+            color: #ff5555;
+        }
+
+        .action-icon-btn.delete-btn i {
+            color: #ff5555;
+            font-size: 15px;
+        }
+
+        .action-icon-btn.delete-btn:hover {
+            background: #ff5555;
+            border-color: #ff5555;
+            color: #ffffff;
+        }
+
+        .action-icon-btn.delete-btn:hover i,
+        .action-icon-btn.delete-btn:hover svg {
+            color: #ffffff;
+            stroke: #ffffff;
+        }
+
+        /* 7. نافذة التقرير الشامل والفاتورة (Modal System) */
+        .modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            background: #141414;
+            border: 2px solid #dbc38b;
+            border-radius: 25px;
+            padding: 35px;
+            z-index: 1001;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow-y: auto;
+            color: #ffffff;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-card.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            color: #dbc38b;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .report-section {
+            background: #1f1f1f;
+            border: 1px solid #333333;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        .report-section-title {
+            font-size: 16px;
+            color: #dbc38b;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed #444;
+            padding-bottom: 6px;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .report-item {
+            background: #272727;
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .report-item-label {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .report-item-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .print-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .print-btn {
+            flex: 1;
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(219, 195, 139, 0.3);
+        }
+
+        .print-btn:hover {
+            background: #c4a768;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        /* 8. القائمة الجانبية المنزلقة (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 14px;
+            background: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #252525;
+            color: #dbc38b;
+            padding-right: 22px;
+        }
+
+        .drawer-menu li a.highlight-menu {
+            border: 1px solid #dbc38b;
+            background: rgba(219, 195, 139, 0.1);
+            color: #dbc38b;
+        }
+
+        .drawer-menu li a.highlight-menu:hover {
+            background: #dbc38b;
+            color: #000000;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #reportModal,
+            #reportModal * {
+                visibility: visible;
+            }
+
+            #reportModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            .report-section,
+            .report-item {
+                background: #f5f5f5 !important;
+                color: #000000 !important;
+                border: 1px solid #ccc !important;
+            }
+
+            .report-item-val,
+            .modal-header h2,
+            .report-section-title {
+                color: #000000 !important;
+            }
+
+            .print-actions,
+            .modal-close-btn {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                margin-right: 0;
+                width: 100%;
+                padding-bottom: 120px;
+            }
+
+            .web-sidebar {
+                bottom: 0;
+                top: auto;
+                right: 0;
+                width: 100%;
+                height: 75px;
+                flex-direction: row;
+                padding: 0 20px;
+                border-top: 1px solid #222222;
+                border-left: none;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .sidebar-item.active::before {
+                display: none;
+            }
+
+            .grid-2-col-orders,
+            .top-controls-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+                flex-direction: column;
+            }
+
+            .create-order-action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="closeReportModal()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة الجانبية (الدراور) -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item" onclick="window.location.href='/customer-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/choose-tailor.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                    <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                    <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                </svg>
+                <span>الخياطين</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/app-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <!-- 2. منطقة المحتوى الرئيسي -->
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">طلبات الخياطة</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- شريط محرك البحث وإنشاء طلب جديد لتعديل وتغطية الفراغ -->
+        <div class="top-controls-container">
+            <div class="search-box-wrapper">
+                <span class="search-icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="searchInput" class="search-input-field" onkeyup="filterOrders()"
+                    placeholder="ابحث عن طلب، خياط، أو نوع القماش...">
+            </div>
+
+            <button class="create-order-action-btn" onclick="window.location.href='/men-thobes.html'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span>إنشاء طلب جديد</span>
+            </button>
+        </div>
+
+        <!-- شبكة الطلبات (2 عمود مثل صفحة الخياطين لتغطية الفراغ بالكامل) -->
+        <main class="grid-2-col-orders" id="ordersContainer">
+
+            <!-- الطلب 1 (ثوب أبيض) -->
+            <div class="order-luxury-card">
+                <div class="order-card-top">
+                    <div class="order-profile-group">
+                        <div class="order-img-frame">
+                            <img src="/images/thobe_saudi.png" alt="ثوب أبيض">
+                        </div>
+                        <div class="order-text-info">
+                            <div class="client-name-tag">صالح الكميم</div>
+                            <h3 class="order-title">ثوب أبيض فاخر</h3>
+                            <p class="order-subtitle">[مقاس جديد] | خياطة الناصر الفاخرة</p>
+                        </div>
+                    </div>
+                    <div class="status-badge-btn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>قيد التفصيل</span>
+                    </div>
+                </div>
+
+                <div class="card-actions-row">
+                    <button class="report-main-btn"
+                        onclick="openReportModal('#MQ-101', 'صالح الكميم', 'ثوب أبيض فاخر', 'خياطة الناصر', '2026/8/23', '$35', 'كريمي حاسب', '99482716', '/images/thobe_saudi.png')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>التقرير والقياسات</span>
+                    </button>
+                    <button class="action-icon-btn edit-btn" onclick="editOrder('MQ-101', 'ثوب أبيض')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>تعديل</span>
+                    </button>
+                    <button class="action-icon-btn delete-btn" onclick="deleteOrder(this, 'ثوب أبيض')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                        <span>حذف</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الطلب 2 (ثوب ملون) -->
+            <div class="order-luxury-card">
+                <div class="order-card-top">
+                    <div class="order-profile-group">
+                        <div class="order-img-frame">
+                            <img src="/images/thobe_colored.png" alt="ثوب بني">
+                        </div>
+                        <div class="order-text-info">
+                            <div class="client-name-tag">صالح الكميم</div>
+                            <h3 class="order-title">ثوب بني مطرز</h3>
+                            <p class="order-subtitle">[مقاس حسب العمل] | خياطة الأناقة والتميز</p>
+                        </div>
+                    </div>
+                    <div class="status-badge-btn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                        </svg>
+                        <span>قيد الحياكة</span>
+                    </div>
+                </div>
+
+                <div class="card-actions-row">
+                    <button class="report-main-btn"
+                        onclick="openReportModal('#MQ-102', 'صالح الكميم', 'ثوب بني مطرز', 'خياطة الأناقة والتميز', '2026/8/20', '$40', 'محفظة جوالي', '88371920', '/images/thobe_colored.png')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>التقرير والقياسات</span>
+                    </button>
+                    <button class="action-icon-btn edit-btn" onclick="editOrder('MQ-102', 'ثوب بني')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>تعديل</span>
+                    </button>
+                    <button class="action-icon-btn delete-btn" onclick="deleteOrder(this, 'ثوب بني')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                        <span>حذف</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الطلب 3 (ثوب أسود) -->
+            <div class="order-luxury-card">
+                <div class="order-card-top">
+                    <div class="order-profile-group">
+                        <div class="order-img-frame">
+                            <img src="/images/thobe_black.png" alt="ثوب أسود">
+                        </div>
+                        <div class="order-text-info">
+                            <div class="client-name-tag">صالح الكميم</div>
+                            <h3 class="order-title">ثوب أسود رسمي</h3>
+                            <p class="order-subtitle">[مقاس حسب جاهز] | خياطة الخليج الفاخرة</p>
+                        </div>
+                    </div>
+                    <div class="status-badge-btn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>مكتمل ومستلم</span>
+                    </div>
+                </div>
+
+                <div class="card-actions-row">
+                    <button class="report-main-btn"
+                        onclick="openReportModal('#MQ-103', 'صالح الكميم', 'ثوب أسود رسمي', 'خياطة الخليج', '2026/8/15', '$45', 'بنك يمن كواليتي', '77281930', '/images/thobe_black.png')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>التقرير والقياسات</span>
+                    </button>
+                    <button class="action-icon-btn edit-btn" onclick="editOrder('MQ-103', 'ثوب أسود')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>تعديل</span>
+                    </button>
+                    <button class="action-icon-btn delete-btn" onclick="deleteOrder(this, 'ثوب أسود')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                        <span>حذف</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- الطلب 4 (ثوب إماراتي فاخر) -->
+            <div class="order-luxury-card">
+                <div class="order-card-top">
+                    <div class="order-profile-group">
+                        <div class="order-img-frame">
+                            <img src="/images/thobe_emirati.png" alt="ثوب إماراتي فاخر">
+                        </div>
+                        <div class="order-text-info">
+                            <div class="client-name-tag">صالح الكميم</div>
+                            <h3 class="order-title">ثوب إماراتي فاخر</h3>
+                            <p class="order-subtitle">[مقاس محفوظ] | الذهبي للمقاسات والخياطة</p>
+                        </div>
+                    </div>
+                    <div class="status-badge-btn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>جاهز للاستلام</span>
+                    </div>
+                </div>
+
+                <div class="card-actions-row">
+                    <button class="report-main-btn"
+                        onclick="openReportModal('#MQ-104', 'صالح الكميم', 'ثوب إماراتي فاخر', 'الذهبي للمقاسات', '2026/8/10', '$50', 'كريمي حاسب', '66549210', '/images/thobe_emirati.png')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>التقرير والقياسات</span>
+                    </button>
+                    <button class="action-icon-btn edit-btn" onclick="editOrder('MQ-104', 'ثوب إماراتي فاخر')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>تعديل</span>
+                    </button>
+                    <button class="action-icon-btn delete-btn" onclick="deleteOrder(this, 'ثوب إماراتي فاخر')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                        <span>حذف</span>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- نافذة التقرير الشامل وفاتورة التفصيل والقياسات المحفوظة -->
+    <div class="modal-card" id="reportModal">
+        <div class="modal-header">
+            <h2><i class="fas fa-scroll"></i> التقرير الشامل وفاتورة التفصيل المحفوظة</h2>
+            <button class="modal-close-btn" onclick="closeReportModal()">&times;</button>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 15px;">
+            <div
+                style="width: 110px; height: 110px; border-radius: 20px; border: 2px solid #dbc38b; overflow: hidden; margin: 0 auto 10px auto; background: #1f1f1f; box-shadow: 0 0 15px rgba(219,195,139,0.3);">
+                <img id="repProductImg" src="/images/thobe_saudi.png" alt="الزي المختار"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div
+                style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 8px 18px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; font-weight: bold; font-size: 14px;">
+                <i class="fas fa-check-circle"></i> تقرير موثق ومحفوظ داخل التطبيق والدراور 💾
+            </div>
+        </div>
+
+        <!-- 1. تفاصيل الطلب والحساب -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-info-circle"></i> بيانات الطلب والعميل</div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">رقم التقرير / الطلب</div>
+                    <div class="report-item-val" id="repOrderId">#MQ-101</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">اسم العميل</div>
+                    <div class="report-item-val" id="repCustomerName">صالح الكميم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">تاريخ الطلب</div>
+                    <div class="report-item-val" id="repDate">2026/8/23</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">تاريخ موعد الاستلام</div>
+                    <div class="report-item-val" id="repReceiptDate" style="color:#2ecc71;">2026/8/25</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">الخياط المختار</div>
+                    <div class="report-item-val" id="repTailor">خياطة الناصر</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">نوع الثوب والزي</div>
+                    <div class="report-item-val" id="repItem">ثوب أبيض</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">القماش والتفاصيل</div>
+                    <div class="report-item-val" id="repFabric">قطن أبيض ياباني (رقم 12)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. جدول القياسات المحفوظة بالكامل -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-ruler-combined"></i> جدول القياسات التفصيلية الكاملة
+                المحفوظة</div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">الطول الكلي</div>
+                    <div class="report-item-val">145 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">عرض الكتف</div>
+                    <div class="report-item-val">46 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول لجد</div>
+                    <div class="report-item-val">78 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">وسع الصدر</div>
+                    <div class="report-item-val">108 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">دوران الرقبة</div>
+                    <div class="report-item-val">40 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول اليد</div>
+                    <div class="report-item-val">62 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول الكبك</div>
+                    <div class="report-item-val">15 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">الخطوة</div>
+                    <div class="report-item-val">78 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">وسع اليد</div>
+                    <div class="report-item-val">22 سم</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. تفاصيل الحساب والدفع -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-file-invoice"></i> تفاصيل الحساب والحوالة الإلكترونية
+            </div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">المبلغ الإجمالي</div>
+                    <div class="report-item-val" id="repPrice" style="color:#dbc38b;">$35</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">المحفظة المحول منها</div>
+                    <div class="report-item-val" id="repWallet">كريمي حاسب</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">رقم عملية التحويل (المرجع)</div>
+                    <div class="report-item-val" id="repRef" style="color:#2ecc71;">#99482716</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">اسم المحول</div>
+                    <div class="report-item-val" id="repSender">صالح الكميم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">حالة الحوالة والطلب</div>
+                    <div class="report-item-val" style="color:#2ecc71;">مكتمل وموثق</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">الحفظ المباشر</div>
+                    <div class="report-item-val" style="color:#dbc38b;">محفوظ بذاكرة التطبيق والدراور 💾</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="print-actions">
+            <button class="print-btn" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة التقرير / حفظ PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>مقاسك</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/customer-dashboard.html">
+                    <span>الرئيسية</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html" class="highlight-menu">
+                    <span>📑 تقارير التفصيل المحفوظة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html">
+                    <span>طلباتي</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 16 14"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/payment.html">
+                    <span>طريقة الدفع</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/ready-sizes.html">
+                    <span>حفظ</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('تم تنفيذ العملية')">
+                    <span>حذف</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/choose-tailor.html">
+                    <span>قائمة الخياطين</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('لا توجد إشعارات جديدة حالياً')">
+                    <span>الاشعارات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadSavedOrders();
+        });
+
+        async function loadSavedOrders() {
+            const container = document.getElementById('ordersContainer');
+            let savedReports = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+
+            try {
+                const res = await fetch('/api/orders');
+                if (res.ok) {
+                    const apiOrders = await res.json();
+                    apiOrders.forEach(apiItem => {
+                        const itemNum = apiItem.orderNumber || ('#MQ-' + apiItem.id);
+                        if (!savedReports.some(r => r.id === itemNum || r.id === apiItem.id)) {
+                            savedReports.unshift({
+                                id: itemNum,
+                                customerName: apiItem.customerName || 'عميل',
+                                customerPhone: apiItem.customerPhone || '---',
+                                tailorName: apiItem.tailorName || 'محل الناصر للخياطة',
+                                itemTitle: apiItem.itemTitle || 'ثوب تفصيل',
+                                productImg: apiItem.productImg || '/images/thobe_saudi.png',
+                                fabric: apiItem.fabric || 'قطن ياباني رقم 12',
+                                date: apiItem.date || '2026/9/06',
+                                receiptDate: apiItem.receiptDate || '2026/9/13',
+                                price: apiItem.price || '$35',
+                                paidAmount: apiItem.paidAmount || '$35',
+                                wallet: apiItem.wallet || 'تحويل إلكتروني',
+                                refNo: apiItem.refNo || '1000',
+                                status: apiItem.status || 'قيد التفصيل'
+                            });
+                        }
+                    });
+                }
+            } catch (e) {
+                console.warn("Could not fetch API orders:", e);
+            }
+
+            container.innerHTML = '';
+            savedReports.forEach((rep, index) => {
+                const card = document.createElement('div');
+                card.className = 'order-luxury-card';
+
+                // فحص تاريخ الاستلام ومقارنته بالوقت الحالي
+                let currentStatus = rep.status || 'قيد التفصيل';
+                let badgeClass = 'status-badge-btn';
+                let iconMarkup = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
+
+                if (rep.receiptDate) {
+                    const todayStr = new Date().toISOString().split('T')[0];
+                    if (rep.receiptDate <= todayStr || currentStatus === 'جاهز للاستلام') {
+                        currentStatus = 'جاهز للاستلام';
+                        iconMarkup = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+                        badgeClass += ' ready-status';
+                    }
+                }
+
+                const imgSource = rep.productImg || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80';
+
+                card.innerHTML = `
+                    <div class="order-card-top">
+                        <div class="order-profile-group">
+                            <div class="order-img-frame">
+                                <img src="${imgSource}" alt="${rep.customerName}" onerror="this.src='/images/thobe_saudi.png'">
+                            </div>
+                            <div class="order-text-info">
+                                <div class="client-name-tag">${rep.customerName}</div>
+                                <h3 class="order-title">${rep.itemTitle} (${rep.id})</h3>
+                                <p class="order-subtitle">${rep.tailorName} | تاريخ الاستلام: <span style="color:#dbc38b;">${rep.receiptDate || rep.date}</span></p>
+                            </div>
+                        </div>
+                        <div class="${badgeClass}">
+                            ${iconMarkup} <span>${currentStatus}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-actions-row">
+                        <button class="report-main-btn" onclick="openReportModalByIndex(${index})">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                            <span>التقرير والقياسات</span>
+                        </button>
+                        <button class="action-icon-btn edit-btn" onclick="editOrder('${rep.id}', '${rep.itemTitle}')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            <span>تعديل</span>
+                        </button>
+                        <button class="action-icon-btn delete-btn" onclick="deleteOrder(this, '${rep.itemTitle}', ${index})">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            <span>حذف</span>
+                        </button>
+                    </div>
+                `;
+                container.prepend(card);
+            });
+        }
+
+        /* محرك البحث الفوري في الطلبات */
+        function filterOrders() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.order-luxury-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* وظيفة تعديل الطلب */
+        function editOrder(orderId, orderTitle) {
+            window.location.href = `/fill-measurements.html?orderId=${encodeURIComponent(orderId)}`;
+        }
+
+        /* وظيفة حذف الطلب مع التأكيد */
+        function deleteOrder(btnElement, orderTitle, index) {
+            if (confirm(`هل أنت تأكد من رغبتك في حذف طلب (${orderTitle})؟`)) {
+                let savedReports = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+                if (index !== undefined && savedReports[index]) {
+                    savedReports.splice(index, 1);
+                    localStorage.setItem('maqas_saved_reports', JSON.stringify(savedReports));
+                }
+                const card = btnElement.closest('.order-luxury-card');
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            }
+        }
+
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function openReportModalByIndex(index) {
+            const savedReports = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+            const rep = savedReports[index];
+            if (!rep) return;
+
+            if (document.getElementById('repProductImg')) {
+                document.getElementById('repProductImg').src = rep.productImg || '/images/thobe_saudi.png';
+            }
+            document.getElementById('repOrderId').innerText = rep.id || '#MQ-101';
+            document.getElementById('repCustomerName').innerText = rep.customerName || 'صالح الكميم';
+            document.getElementById('repSender').innerText = rep.customerName || 'صالح الكميم';
+            document.getElementById('repItem').innerText = rep.itemTitle || 'ثوب أبيض';
+            document.getElementById('repFabric').innerText = rep.fabric || 'قطن أبيض ياباني';
+            document.getElementById('repTailor').innerText = rep.tailorName || 'خياطة الناصر';
+            document.getElementById('repDate').innerText = rep.date || '2026/8/23';
+            if (document.getElementById('repReceiptDate')) {
+                document.getElementById('repReceiptDate').innerText = rep.receiptDate || rep.date;
+            }
+            document.getElementById('repPrice').innerText = rep.price || '$35';
+            document.getElementById('repWallet').innerText = rep.wallet || 'كريمي حاسب';
+            document.getElementById('repRef').innerText = '#' + (rep.refNo || '99482716');
+
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('reportModal').classList.add('active');
+        }
+
+        function openReportModal(orderId, customerName, itemName, tailorName, orderDate, price, wallet, refNo, productImg) {
+            if (document.getElementById('repProductImg')) {
+                document.getElementById('repProductImg').src = productImg || '/images/thobe_saudi.png';
+            }
+            document.getElementById('repOrderId').innerText = orderId;
+            document.getElementById('repCustomerName').innerText = customerName;
+            document.getElementById('repSender').innerText = customerName;
+            document.getElementById('repItem').innerText = itemName;
+            document.getElementById('repTailor').innerText = tailorName;
+            document.getElementById('repDate').innerText = orderDate;
+            document.getElementById('repPrice').innerText = price;
+            document.getElementById('repWallet').innerText = wallet;
+            document.getElementById('repRef').innerText = '#' + refNo;
+
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('reportModal').classList.add('active');
+        }
+
+        function closeReportModal() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('reportModal').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

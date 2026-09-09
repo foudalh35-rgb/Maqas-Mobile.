@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to MyProject</h1>
+    <p>Clean Architecture with ASP.NET Core</p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Products</h5>
+                    <p class="card-text">Manage your products catalog.</p>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Customers</h5>
+                    <p class="card-text">Manage your customers.</p>
+                    <a asp-controller="Customers" asp-action="Index" class="btn btn-primary">View Customers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">API</h5>
+                    <p class="card-text">Access the REST API documentation.</p>
+                    <a href="/swagger" class="btn btn-primary">Swagger UI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

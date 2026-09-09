@@ -1,0 +1,12 @@
+# Visual Studio / .NET gitignore
+.vs/
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+.idea/
+.vscode/
+*.appx
+*.appxbundle
+*.appxupload

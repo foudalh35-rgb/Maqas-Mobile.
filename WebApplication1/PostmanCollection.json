@@ -1,0 +1,96 @@
+{
+  "info": {
+    "name": "WebApplication1 Demo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "CRUD endpoints for DemoController (api/demo)"
+  },
+  "item": [
+    {
+      "name": "GET All Demo Items",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5002/api/demo",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["api", "demo"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Demo Item By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5002/api/demo/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["api", "demo", "{{id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Create Demo Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New Item\",\n  \"description\": \"Sample description\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5002/api/demo",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["api", "demo"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT Update Demo Item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Item\",\n  \"description\": \"Updated description\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5002/api/demo/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["api", "demo", "{{id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Demo Item",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5002/api/demo/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["api", "demo", "{{id}}"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

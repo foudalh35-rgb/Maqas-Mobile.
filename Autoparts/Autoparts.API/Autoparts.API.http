@@ -1,0 +1,26 @@
+### GET all MaqasOrders
+GET http://localhost:5041/api/Maqas
+Accept: application/json
+
+###
+
+### POST a new MaqasOrder
+POST http://localhost:5041/api/Maqas
+Content-Type: application/json
+
+{
+  "customerName": "أحمد علي",
+  "phone": "0501234567",
+  "fabricType": "صوف إنجليزي",
+  "length": 140.0,
+  "shoulder": 48.0,
+  "waist": 90.0,
+  "neck": 40.0,
+  "arm": 60.0,
+  "totalPrice": 500.0,
+  "advancePayment": 100.0,
+  "paid": 200.0,
+  "jobStatus": "قيد التنفيذ"
+}
+
+###

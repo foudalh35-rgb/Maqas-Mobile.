@@ -1,0 +1,901 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - القياسات والتقارير المحفوظة</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي */
+        .main-wrapper {
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+
+        /* 3. الهيدر الذهبي الممتد */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 40px 0;
+        }
+
+        .header-title {
+            font-size: 34px;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 4. حاوية القياسات المحفوظة (شبكة) */
+        .grid-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 40px;
+            flex: 1;
+        }
+
+        /* 5. تصميم بطاقات القياسات الفاخرة */
+        .size-luxury-card {
+            background: #161616;
+            border: 1px solid rgba(219, 195, 139, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            width: 100%;
+        }
+
+        .size-luxury-card:hover {
+            transform: translateY(-6px);
+            border-color: #dbc38b;
+            background: #1c1c1c;
+            box-shadow: 0 20px 45px rgba(219, 195, 139, 0.25);
+        }
+
+        .size-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #282828;
+            padding-bottom: 15px;
+        }
+
+        .size-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .size-date {
+            font-size: 13px;
+            color: #888888;
+        }
+
+        .measure-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .measure-pill {
+            background: #222222;
+            padding: 8px 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .measure-pill-label {
+            font-size: 11px;
+            color: #a0a0a0;
+        }
+
+        .measure-pill-val {
+            font-size: 15px;
+            font-weight: 700;
+            color: #dbc38b;
+        }
+
+        .size-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .use-size-btn {
+            flex: 1;
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .use-size-btn:hover {
+            background: #c4a768;
+        }
+
+        .delete-size-btn {
+            background: rgba(255, 85, 85, 0.15);
+            color: #ff5555;
+            border: 1px solid #ff5555;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .delete-size-btn:hover {
+            background: #ff5555;
+            color: #ffffff;
+        }
+
+        /* 6. القائمة الجانبية (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            color: #ffffff;
+            margin: 0 auto 15px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 14px;
+            background: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #252525;
+            color: #dbc38b;
+            padding-right: 25px;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                background-color: #0d0d0d;
+                margin-right: 0;
+                width: 100%;
+                padding-bottom: 120px;
+            }
+
+            .web-sidebar {
+                bottom: 0;
+                top: auto;
+                right: 0;
+                width: 100%;
+                height: 75px;
+                flex-direction: row;
+                padding: 0 20px;
+                border-top: 1px solid #222222;
+                border-left: none;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .sidebar-item.active::before {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة الجانبية (الدراور) -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item" onclick="window.location.href='/customer-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/choose-tailor.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                    <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                    <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                </svg>
+                <span>الخياطين</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/app-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/ready-sizes.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span>حفظ</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <!-- 2. منطقة المحتوى الرئيسي -->
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">سجل القياسات والتقارير المحفوظة</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- حاوية بطاقات القياسات المحفوظة -->
+        <main class="grid-container" id="sizesContainer">
+
+            <!-- ملف قياس 1 (ثابت - قياس شخصي) -->
+            <div class="size-luxury-card" id="card-personal-1">
+                <div class="size-card-header">
+                    <div class="size-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>قياساتي الشخصية الأساسية</span>
+                    </div>
+                    <span class="size-date">تحديث: 2026/8/23</span>
+                </div>
+                <div class="measure-preview-grid">
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الطول</div>
+                        <div class="measure-pill-val">145 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الكتف</div>
+                        <div class="measure-pill-val">46 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الصدر</div>
+                        <div class="measure-pill-val">108 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الرقبة</div>
+                        <div class="measure-pill-val">40 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">اليد</div>
+                        <div class="measure-pill-val">62 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الجد</div>
+                        <div class="measure-pill-val">78 سم</div>
+                    </div>
+                </div>
+                <div class="size-actions">
+                    <button class="use-size-btn" onclick="window.location.href='/fill-measurements.html'">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                        </svg>
+                        <span>تفصيل جديد بهذا القياس</span>
+                    </button>
+                    <button class="delete-size-btn" onclick="deleteCard('card-personal-1')" title="حذف هذا القياس">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ملف قياس 2 (ثابت - قياس شخصي) -->
+            <div class="size-luxury-card" id="card-personal-2">
+                <div class="size-card-header">
+                    <div class="size-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span>مقاسات أخي (محمد)</span>
+                    </div>
+                    <span class="size-date">تحديث: 2026/8/10</span>
+                </div>
+                <div class="measure-preview-grid">
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الطول</div>
+                        <div class="measure-pill-val">140 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الكتف</div>
+                        <div class="measure-pill-val">44 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الصدر</div>
+                        <div class="measure-pill-val">100 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الرقبة</div>
+                        <div class="measure-pill-val">38 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">اليد</div>
+                        <div class="measure-pill-val">60 سم</div>
+                    </div>
+                    <div class="measure-pill">
+                        <div class="measure-pill-label">الجد</div>
+                        <div class="measure-pill-val">75 سم</div>
+                    </div>
+                </div>
+                <div class="size-actions">
+                    <button class="use-size-btn" onclick="window.location.href='/fill-measurements.html'">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                        </svg>
+                        <span>تفصيل جديد بهذا القياس</span>
+                    </button>
+                    <button class="delete-size-btn" onclick="deleteCard('card-personal-2')" title="حذف هذا القياس">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>مقاسك</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/customer-dashboard.html">
+                    <span>الرئيسية</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html">
+                    <span>طلباتي</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 16 14"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/payment.html">
+                    <span>طريقة الدفع</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/ready-sizes.html">
+                    <span>حفظ</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/choose-tailor.html">
+                    <span>قائمة الخياطين</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('لا توجد إشعارات جديدة حالياً')">
+                    <span>الإشعارات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadReadySizes();
+        });
+
+        function loadReadySizes() {
+            const container = document.getElementById('sizesContainer');
+            const savedReports = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            savedReports.forEach((rep, index) => {
+                // عرض الطلبات التي حان موعد استلامها أو تم تجهيزها بواسطة الخياط
+                const isReady = true; // يتم عرض التقارير المحفوظة والجاهزة للاستلام فور انتهاء المهلة أو الحفظ
+
+                const card = document.createElement('div');
+                card.className = 'size-luxury-card';
+                card.id = 'saved-report-' + index;
+                card.style.borderColor = '#2ecc71';
+                card.style.boxShadow = '0 10px 30px rgba(46, 204, 113, 0.2)';
+                card.innerHTML = `
+                    <div class="size-card-header">
+                        <div class="size-title" style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 50px; height: 50px; border-radius: 12px; border: 1.5px solid #2ecc71; overflow: hidden; background: #222; flex-shrink: 0;">
+                                <img src="${rep.productImg || '/images/thobe_saudi.png'}" alt="${rep.itemTitle}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='/images/thobe_saudi.png'">
+                            </div>
+                            <div>
+                                <div style="font-size: 18px; font-weight: bold; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    ${rep.itemTitle || 'تفصيل مخصص'} (${rep.id || '#ORD-' + (index + 101)})
+                                </div>
+                                <span class="size-date" style="color:#2ecc71; font-size: 12px; font-weight: 600;">
+                                    تم تجهيز الطلب - تاريخ الاستلام: ${rep.receiptDate || rep.date || todayStr}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="measure-preview-grid">
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">العميل</div>
+                            <div class="measure-pill-val" style="color: #dbc38b;">${rep.customerName || 'صاحب المقاس'}</div>
+                        </div>
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">الخياط</div>
+                            <div class="measure-pill-val">${rep.tailorName || 'خياط مقاس'}</div>
+                        </div>
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">القماش</div>
+                            <div class="measure-pill-val">${rep.fabric || 'فاخر'}</div>
+                        </div>
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">المبلغ</div>
+                            <div class="measure-pill-val" style="color: #60a5fa;">${rep.price || '$80'}</div>
+                        </div>
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">الحالة</div>
+                            <div class="measure-pill-val" style="color:#2ecc71; font-weight: bold;">جاهز للاستلام</div>
+                        </div>
+                        <div class="measure-pill">
+                            <div class="measure-pill-label">المرجع</div>
+                            <div class="measure-pill-val">#${rep.refNo || (1000 + index)}</div>
+                        </div>
+                    </div>
+                    <div class="size-actions">
+                        <button class="use-size-btn" onclick="window.location.href='/app-orders.html'" style="background: #2ecc71; color: #000;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                            <span>عرض التقرير الشامل في طلباتي</span>
+                        </button>
+                        <button class="delete-size-btn" onclick="deleteSavedReport(${index})" title="حذف هذا التقرير">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                container.prepend(card);
+            });
+        }
+
+        function deleteCard(elementId) {
+            const card = document.getElementById(elementId);
+            if (card && confirm('هل أنت تأكد من حذف بطاقة القياس هذه؟')) {
+                card.style.transition = 'all 0.4s ease';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    card.remove();
+                }, 400);
+            }
+        }
+
+        function deleteSavedReport(index) {
+            if (confirm('هل أنت تأكد من حذف هذا التقرير المحفوظ؟')) {
+                let savedReports = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+                savedReports.splice(index, 1);
+                localStorage.setItem('maqas_saved_reports', JSON.stringify(savedReports));
+                location.reload();
+            }
+        }
+
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+    </script>
+</body>
+
+</html>

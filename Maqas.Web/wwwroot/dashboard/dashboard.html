@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>واجهة عرض بيانات الـ API - مشغل الخياطة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --accent: #10b981;
+            --purple: #a855f7;
+            --amber: #f59e0b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; padding-bottom: 3rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Navbar */
+        .navbar { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+        .logo i { color: var(--accent); font-size: 1.6rem; }
+        .nav-links { display: flex; gap: 0.75rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary { background: #334155; color: white; border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: #475569; }
+
+        /* Grid Cards Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; display: flex; align-items: center; gap: 1rem; }
+        .stat-icon { width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+        .stat-blue { background: rgba(59, 130, 246, 0.15); color: var(--primary); }
+        .stat-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
+        .stat-purple { background: rgba(168, 85, 247, 0.15); color: var(--purple); }
+
+        .stat-info span { font-size: 0.85rem; color: var(--text-muted); }
+        .stat-info h3 { font-size: 1.5rem; font-weight: 700; }
+
+        /* Section Cards */
+        .section-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; margin-bottom: 2rem; overflow: hidden; }
+        .card-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .card-header h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Table */
+        .table-responsive { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; text-align: right; }
+        .data-table th, .data-table td { padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border-color); }
+        .data-table th { background: rgba(15, 23, 42, 0.5); color: var(--text-muted); font-size: 0.85rem; }
+        .data-table tbody tr:hover { background: rgba(51, 65, 85, 0.3); }
+
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
+        .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+
+        .detail-item { display: inline-block; background: #0f172a; border: 1px solid var(--border-color); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin: 0.1rem; }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-scissors"></i>
+                <span>واجهة عرض بيانات الـ API</span>
+            </div>
+            <div class="nav-links">
+                <button onclick="fetchData()" class="btn btn-primary">
+                    <i class="fa-solid fa-rotate-right"></i> تحديث البيانات
+                </button>
+                <a href="/scalar/v1" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-code"></i> واجهة Scalar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon stat-blue"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <span>عدد الزبائن</span>
+                    <h3 id="count-customers">0</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-emerald"><i class="fa-solid fa-shirt"></i></div>
+                <div class="stat-info">
+                    <span>أنواع الملابس</span>
+                    <h3 id="count-clothing">0</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-purple"><i class="fa-solid fa-ruler-combined"></i></div>
+                <div class="stat-info">
+                    <span>جلسات القياسات</span>
+                    <h3 id="count-measurements">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customers Section -->
+        <section class="section-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-user-group text-primary"></i> 1. جدول الزبائن (Customers API)</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th># المعرف (ID)</th>
+                            <th>الاسم الكامل</th>
+                            <th>رقم الهاتف</th>
+                            <th>الملاحظات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customers-list">
+                        <tr><td colspan="4" style="text-align:center;">جاري جلب البيانات من الـ API...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Clothing Types Section -->
+        <section class="section-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-tags text-accent"></i> 2. جدول أنواع الملابس (Clothing Types API)</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th># المعرف (ID)</th>
+                            <th>اسم نوع الملابس</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clothing-list">
+                        <tr><td colspan="2" style="text-align:center;">جاري جلب البيانات من الـ API...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Measurements Section -->
+        <section class="section-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-clipboard-list text-purple"></i> 3. جدول جلسات القياس والطلبات (Measurements API)</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th># المعرف (ID)</th>
+                            <th>اسم الزبون</th>
+                            <th>نوع الملابس</th>
+                            <th>تاريخ القياس</th>
+                            <th>الحالة</th>
+                            <th>التفاصيل والقياسات الفرعية</th>
+                        </tr>
+                    </thead>
+                    <tbody id="measurements-list">
+                        <tr><td colspan="6" style="text-align:center;">جاري جلب البيانات من الـ API...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', fetchData);
+
+        async function fetchData() {
+            try {
+                // Fetch Customers
+                const resCust = await fetch('/api/customers');
+                if (resCust.ok) {
+                    const custs = await resCust.json();
+                    document.getElementById('count-customers').innerText = custs.length;
+                    renderCustomers(custs);
+                }
+
+                // Fetch Clothing Types
+                const resType = await fetch('/api/clothingtypes');
+                if (resType.ok) {
+                    const types = await resType.json();
+                    document.getElementById('count-clothing').innerText = types.length;
+                    renderClothingTypes(types);
+                }
+
+                // Fetch Measurements
+                const resMeas = await fetch('/api/measurements');
+                if (resMeas.ok) {
+                    const meas = await resMeas.json();
+                    document.getElementById('count-measurements').innerText = meas.length;
+                    renderMeasurements(meas);
+                }
+            } catch (err) {
+                console.error('Error fetching API data:', err);
+            }
+        }
+
+        function renderCustomers(data) {
+            const tbody = document.getElementById('customers-list');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">لا يوجد زبائن حالياً.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(c => `
+                <tr>
+                    <td><strong>#${c.customerId}</strong></td>
+                    <td><strong>${escapeHtml(c.fullName)}</strong></td>
+                    <td><i class="fa-solid fa-phone"></i> ${escapeHtml(c.phone)}</td>
+                    <td>${escapeHtml(c.notes || '-')}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderClothingTypes(data) {
+            const tbody = document.getElementById('clothing-list');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="2" style="text-align:center; color:#94a3b8;">لا يوجد أنواع ملابس بعد.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(t => `
+                <tr>
+                    <td><strong>#${t.typeId}</strong></td>
+                    <td><span class="badge badge-green">${escapeHtml(t.typeName)}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMeasurements(data) {
+            const tbody = document.getElementById('measurements-list');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">لا يوجد جلسات قياس حالياً.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(m => {
+                const dateStr = new Date(m.dateMeasured).toLocaleDateString('ar-SA');
+                const details = (m.details || []).map(d => 
+                    `<span class="detail-item"><strong>${escapeHtml(d.attributeName)}:</strong> ${d.value} ${escapeHtml(d.typeUnit)}</span>`
+                ).join('');
+
+                return `
+                    <tr>
+                        <td><strong>#${m.sessionId}</strong></td>
+                        <td><strong>${escapeHtml(m.customerName || '-')}</strong></td>
+                        <td>${escapeHtml(m.clothingTypeName || '-')}</td>
+                        <td>${dateStr}</td>
+                        <td><span class="badge badge-amber">${escapeHtml(m.status)}</span></td>
+                        <td>${details || 'لا يوجد تفاصيل'}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, match => {
+                const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+                return map[match];
+            });
+        }
+    </script>
+</body>
+</html>
