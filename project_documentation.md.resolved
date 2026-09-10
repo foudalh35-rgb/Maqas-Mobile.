@@ -1,0 +1,69 @@
+# 📄 التوثيق المعماري الشامل لمشروع "مقاسك" (Web & Flutter Mobile App Documentation)
+
+---
+
+## 1️⃣ مقدمة عن المشروع الشامل (Project Overview)
+مشروع **"مقاسك - Maqas"** هو نظام إلكتروني عابر للمنصات (**Cross-Platform System**) يتكون من **موقع ويب (Web Application)** و**تطبيق جوال (Flutter Mobile Application)** يخدمان كلاً من العملاء والخياطين ومسؤولي النظام، ومربوطين بسيرفر وخلفية برمجية موحدة (**Clean Architecture Backend API**) وقاعدة بيانات واحدة (**SQL Server**).
+
+---
+
+## 2️⃣ الهيكلية المعمارية الموحدة (Unified Architecture Design)
+
+```mermaid
+graph TD
+    Web[🌐 موقع الويب Web App] --> API[⚡ الـ API الموحد Maqas.API]
+    Mobile[📱 تطبيق الجوال Flutter Mobile] --> API
+    API --> App[طبقة التطبيق Application - Maqas.Application]
+    App --> Domain[طبقة الكيانات Domain - Maqas.Domain]
+    Infra[طبقة البنية التحتية Infrastructure - Maqas.Infrastructure] --> App
+    Infra --> Domain
+    Infra --> DB[(قاعدة البيانات SQL Server)]
+```
+
+---
+
+## 3️⃣ توثيق تطبيق الجوال (Flutter Mobile Application Documentation)
+
+### أ. التقنيات والمكتبات المستخدمة في الجوال:
+* **الإطار البرمجي:** Flutter (لغة Dart).
+* **مكتبات الاتصال بشبكة API:** `http` / `dio` لاتصال شبكي متزامن وسريع.
+* **إدارة الحالة والتنقل:** `StatefulWidget` / `Provider` لإدارة حالة الشاشات والتغييرات الحية.
+
+### ب. الشاشات الرئيسية في تطبيق الجوال:
+1. **شاشة الدخول والتسجيل (Login & Register Screen):**
+   * ترسل بيانات الحساب إلى `/api/auth/login` أو `/api/users`.
+2. **شاشة الكتالوج والمنتجات (Catalog & Products Screen):**
+   * تستدعي `/api/products` لجلب الأثواب والبدلات والفساتين ديناميكياً وعرضها في كروت فاخرة.
+3. **شاشة ملء المقاسات (Measurements Fill Screen):**
+   * إدخال تفاصيل المقاسات الخاصة بالبدلة أو الثوب وإرسالها لـ API المزاد والطلبات.
+4. **شاشة طلباتي (My Orders Screen):**
+   * تستدعي `/api/orders` لعرض الطلبات الجارية وحالتها (جاهز للاستلام / قيد التفصيل)، مع إمكانية حذف أو تعديل الطلب.
+5. **شاشة محادثة الخياط (Tailor Chat Screen):**
+   * تستدعي `/api/messages` لإرسال واستقبال الرسائل بين العميل والخياط.
+
+---
+
+## 4️⃣ توثيق موقع الويب (Web Application Documentation)
+
+### أ. التقنيات المستخدمة في الويب:
+* **الواجهة:** HTML5, CSS3 (Luxury Dark Theme), Vanilla JavaScript.
+* **الخلفية:** ASP.NET Core API / MVC (`Maqas.API` & `Maqas.MVC`).
+
+### ب. الصفحات الرئيسية في الويب:
+1. **صفحة الكتالوج والبدلات ([men-suits.html](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/wwwroot/catalog/men-suits.html) / [men-thobes.html](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/wwwroot/men-thobes/men-thobes.html)):**
+   * ترتبط ديناميكياً بـ `/api/products?category=...` لجلب المنتجات من SQL Server.
+2. **صفحة طلباتي ([app-orders.html](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/wwwroot/orders/app-orders.html)):**
+   * ترتبط ديناميكياً بـ `/api/orders` وتدعم الحذف والتعديل المباشر على قاعدة البيانات.
+3. **صفحة الدفع وإدارة الحسابات ([payment.html](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/wwwroot/payment/payment.html) / [login.html](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/wwwroot/login/login.html)).**
+
+---
+
+## 5️⃣ التنسيق والتكامل المتبادل (Cross-Platform Synchronization)
+
+| الميزة | تطبيق الجوال (Flutter) | موقع الويب (Web) | قاعدة البيانات المشتركة |
+| :--- | :--- | :--- | :--- |
+| **عرض المنتجات** | `GET /api/products` | `GET /api/products` | جدول [Products](file:///c:/Users/fuaf/source/kghke/opject2/Maqas.API/Controllers/ProductsController.cs#19-26) في SQL Server |
+| **إضافة / حذف الطلبات** | `POST/DELETE /api/orders` | `POST/DELETE /api/orders` | جدول `Orders` في SQL Server |
+| **المحادثات والمقاسات** | `GET/POST /api/messages` | `GET/POST /api/messages` | جدول `ChatMessages` و `MeasurementSessions` |
+
+* **فائدة الربط:** عند إدخال طلب جديد من تطبيق الجوال، يظهر فوراً في موقع الويب وفي قاعدة البيانات بدون أي تأخير!
