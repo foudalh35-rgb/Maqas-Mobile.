@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - استعادة كلمة المرور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .global-gold-bar {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(180deg, #f3cf65 0%, #d4af37 70%, #b89222 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            padding-top: 12px;
+        }
+
+        .form-section {
+            flex: 1;
+            background: linear-gradient(135deg, #111111 0%, #070707 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            right: 15px;
+            color: #666;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 45px 14px 15px;
+            background: #161616 !important;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            color: #fff !important;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #d4af37, #aa820a);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .back-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .info-section {
+            flex: 1.2;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.88)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1200&auto=format&fit=crop') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .info-content h1 {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #d4af37);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .info-content p {
+            font-size: 18px;
+            color: #b3b3b3;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 900px) {
+            .info-section {
+                display: none;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="global-gold-bar"></div>
+
+    <div class="login-container">
+        <!-- واجهة استعادة كلمة المرور المنفصلة -->
+        <div class="form-section">
+            <div class="form-box">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <i class="fas fa-key" style="font-size: 24px; color: #d4af37;"></i>
+                    </div>
+                    <h2 style="color: #d4af37; font-size: 24px; font-weight: 700; margin-bottom: 6px;">استعادة كلمة
+                        المرور</h2>
+                    <p style="color: #888; font-size: 14px;">أدخل بريدك الإلكتروني المسجل وسنرسل لك تعليكات إعادة
+                        التعيين</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="emailInput">البريد الإلكتروني</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="emailInput" placeholder="Email" autocomplete="off" dir="ltr"
+                            style="text-align: left; padding-left: 45px; padding-right: 15px;">
+                        <i class="fas fa-envelope" style="left: 15px; right: auto;"></i>
+                    </div>
+                </div>
+
+                <div id="resetMsg"
+                    style="display: none; padding: 12px; border-radius: 8px; font-size: 13px; text-align: center; margin-top: 15px;">
+                </div>
+
+                <button type="button" class="submit-btn" onclick="handlePasswordReset()">
+                    <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>إرسال رابط الاستعادة
+                </button>
+
+                <div class="back-link">
+                    <a href="login.html"><i class="fas fa-arrow-right" style="margin-left: 6px;"></i>العودة إلى صفحة
+                        تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-content">
+                <h1>استعادة الوصول بسهولة</h1>
+                <p>لا تقلق، سنساعدك على استعادة كلمة المرور والوصول إلى حسابك ومقاساتك بأمان تام.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handlePasswordReset() {
+            const email = document.getElementById('emailInput').value.trim();
+            const msgBox = document.getElementById('resetMsg');
+
+            if (!email) {
+                msgBox.style.display = 'block';
+                msgBox.style.background = 'rgba(239, 68, 68, 0.15)';
+                msgBox.style.border = '1px solid #ef4444';
+                msgBox.style.color = '#fca5a5';
+                msgBox.innerHTML = '<i class="fas fa-exclamation-circle"></i> يرجى إدخال البريد الإلكتروني';
+                return;
+            }
+
+            msgBox.style.display = 'block';
+            msgBox.style.background = 'rgba(34, 197, 94, 0.15)';
+            msgBox.style.border = '1px solid #22c55e';
+            msgBox.style.color = '#86efac';
+            msgBox.innerHTML = '<i class="fas fa-check-circle"></i> تم إرسال تعليمات إعادة تعيين كلمة المرور إلى بريدك الإلكتروني بنجاح!';
+        }
+    </script>
+</body>
+
+</html>

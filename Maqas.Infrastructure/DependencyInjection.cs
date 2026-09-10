@@ -12,22 +12,19 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-        if (!string.IsNullOrEmpty(connectionString))
+        if (string.IsNullOrEmpty(connectionString))
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString, sqlOptions =>
-                {
-                    sqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(10),
-                        errorNumbersToAdd: null);
-                }));
+            connectionString = "Server=(localdb)\\mssqllocaldb;Database=MaqasDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
         }
-        else
-        {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase("MaqasDatabase"));
-        }
+
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(connectionString, sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(10),
+                    errorNumbersToAdd: null);
+            }));
 
         services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 

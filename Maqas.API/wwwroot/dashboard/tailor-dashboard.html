@@ -1,0 +1,1033 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - لوحة الخياط الرئيسية</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) بنفس تصميم واجهة العميل */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي */
+        .main-wrapper {
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+
+        /* 3. الهيدر الذهبي الممتد ذو الأطراف المنحنية بالكامل */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 40px 0;
+        }
+
+        .header-title {
+            font-size: 34px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        /* 4. شبكة البطاقات الفاخرة المعتمدة بالواجهة الرئيسية للخياط */
+        .grid-container-tailor {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 40px;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        /* 5. تصميم البطاقات العمودية الفاخرة المطابقة لبطاقات واجهة العميل */
+        .main-card-column {
+            background: #141414;
+            border: 2px solid rgba(219, 195, 139, 0.3);
+            border-radius: 28px;
+            padding: 45px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            min-height: 380px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card-column:hover {
+            transform: translateY(-10px);
+            border-color: #dbc38b;
+            background: #1c1c1c;
+            box-shadow: 0 25px 55px rgba(219, 195, 139, 0.35);
+        }
+
+        .icon-circle-frame {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            border: 2px solid #dbc38b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: #dbc38b;
+            font-size: 42px;
+            box-shadow: 0 0 25px rgba(219, 195, 139, 0.25);
+            transition: all 0.4s ease;
+        }
+
+        .icon-circle-frame svg {
+            stroke: currentColor;
+            transition: all 0.4s ease;
+        }
+
+        .main-card-column:hover .icon-circle-frame {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(219, 195, 139, 0.6);
+        }
+
+        .main-card-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 18px;
+            transition: color 0.3s;
+        }
+
+        .main-card-column:hover .main-card-title {
+            color: #dbc38b;
+        }
+
+        .main-card-desc {
+            font-size: 15px;
+            color: #a0a0a0;
+            line-height: 1.8;
+            max-width: 280px;
+        }
+
+        /* 6. القائمة الجانبية المنزلقة (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #dbc38b;
+            color: #000000;
+            border-color: #dbc38b;
+        }
+
+        .drawer-menu li a:hover svg {
+            stroke: #000000;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 990;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        /* المودالات المخصصة لإدارة اسم المحل والمنتجات */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background-color: #161616;
+            border: 2px solid #dbc38b;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+        }
+
+        .modal-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 14px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #dbc38b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group-field label {
+            font-size: 14px;
+            color: #cccccc;
+            font-weight: 600;
+        }
+
+        .form-input-field,
+        .form-select-field {
+            background-color: #0d0d0d;
+            border: 1px solid #333333;
+            border-radius: 14px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-input-field:focus,
+        .form-select-field:focus {
+            border-color: #dbc38b;
+            background-color: #141414;
+        }
+
+        .btn-submit-action {
+            background-color: #dbc38b;
+            color: #000000;
+            font-weight: bold;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-submit-action:hover {
+            background-color: #c9b078;
+        }
+
+        .product-preview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #0d0d0d;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid #282828;
+        }
+
+        .product-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #181818;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .product-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-item-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #dbc38b;
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة الجانبية (الدراور) -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item active" onclick="window.location.href='/tailor-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/new-sizes.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                    </path>
+                    <line x1="6.5" y1="9.5" x2="8.5" y2="11.5"></line>
+                    <line x1="10.5" y1="13.5" x2="12.5" y2="15.5"></line>
+                    <line x1="14.5" y1="17.5" x2="16.5" y2="19.5"></line>
+                </svg>
+                <span>مقاسات جديدة</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/tailor-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <!-- 2. منطقة المحتوى الرئيسي -->
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي المطابق لواجهة العميل -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/tailor-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">مقاسك (لوحة الخياط الرئيسية)</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- شبكة البطاقات الفاخرة المطابقة بالكامل لشكل واجهة العميل -->
+        <main class="grid-container-tailor">
+
+            <!-- بطاقة 1: القياسات الجديدة -->
+            <div class="main-card-column" onclick="window.location.href='/new-sizes.html'">
+                <div class="icon-circle-frame">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                        </path>
+                        <line x1="6.5" y1="9.5" x2="8.5" y2="11.5"></line>
+                        <line x1="10.5" y1="13.5" x2="12.5" y2="15.5"></line>
+                        <line x1="14.5" y1="17.5" x2="16.5" y2="19.5"></line>
+                    </svg>
+                </div>
+                <h2 class="main-card-title">القياسات الجديدة</h2>
+                <p class="main-card-desc">إدخال وحفظ مقاسات العملاء الجديدة بدقة وتحديد تفاصيل التفصيل والأقمشة.</p>
+            </div>
+
+            <!-- بطاقة 2: القياسات الجاهزة -->
+            <div class="main-card-column" onclick="window.location.href='/tailor-ready-sizes.html'">
+                <div class="icon-circle-frame">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h2 class="main-card-title">القياسات الجاهزة</h2>
+                <p class="main-card-desc">استعراض وإدارة أرشيف القياسات والمواصفات المجهزة ساباقاً للعملاء.</p>
+            </div>
+
+            <!-- بطاقة 3: طلباتي التفصيل من التطبيق -->
+            <div class="main-card-column" onclick="window.location.href='/tailor-orders.html'">
+                <div class="icon-circle-frame">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                        </path>
+                    </svg>
+                </div>
+                <h2 class="main-card-title">طلباتي التفصيل من التطبيق</h2>
+                <p class="main-card-desc">متابعة طلبات التفصيل الواردة وتحديث حالة التجهيز والجاهزية للتسليم.</p>
+            </div>
+
+            <!-- بطاقة 4: إدخال وتحديث اسم المحل والمعلومات -->
+            <div class="main-card-column" onclick="openShopModal()">
+                <div class="icon-circle-frame">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h2 class="main-card-title">إدخال وتحديث اسم المحل</h2>
+                <p class="main-card-desc">تحديد اسم المعرض وتخصصه ورقم التواصل ونشر البيانات مباشرة لصفحات العملاء.</p>
+            </div>
+
+            <!-- بطاقة 5: إضافة وعرض منتجاتك -->
+            <div class="main-card-column" onclick="openProductsModal()">
+                <div class="icon-circle-frame">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h2 class="main-card-title">إضافة وعرض منتجاتك</h2>
+                <p class="main-card-desc">إضافة وتعديل المنتجات والأثواب المعروضة بمحلك وعرض أسعارها للعملاء.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <i class="fas fa-scissors"></i>
+            </div>
+            <h3>حساب الخياط</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/tailor-dashboard.html">
+                    <span>الرئيسية (لوحة الخياط)</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/new-sizes.html">
+                    <span>القياسات الجديدة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                        </path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/tailor-ready-sizes.html">
+                    <span>القياسات الجاهزة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/tailor-orders.html">
+                    <span>طلبات التفصيل الواردة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="openShopModal()">
+                    <span>🏪 إدارة اسم المحل</span>
+                    <i class="fas fa-store" style="color: #dbc38b;"></i>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="openProductsModal()">
+                    <span>🛍️ إدارة المنتجات المعروضة</span>
+                    <i class="fas fa-box-open" style="color: #dbc38b;"></i>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 1. مودال إدخال اسم المحل وتفاصيله -->
+    <div class="modal-overlay" id="shopModal">
+        <div class="modal-box">
+            <div class="modal-header-row">
+                <div class="modal-title"><i class="fas fa-store"></i> إدخال وتحديث اسم المحل والمعلومات</div>
+                <button class="btn-close-modal" onclick="closeShopModal()">&times;</button>
+            </div>
+
+            <div class="form-group-field">
+                <label>اسم المحل / المعرض *</label>
+                <input type="text" class="form-input-field" id="shopNameInput"
+                    placeholder="مثال: محل الأناقة والذهبي للخياطة الفاخرة">
+            </div>
+
+            <div class="form-group-field">
+                <label>تخصص المحل / الوصف *</label>
+                <input type="text" class="form-input-field" id="shopDescInput"
+                    placeholder="مثال: خياطة أثواب رجالية وبدلات عرسان ملكية">
+            </div>
+
+            <div class="form-group-field">
+                <label>فئة المحل الرئيسي *</label>
+                <select class="form-select-field" id="shopCategoryInput">
+                    <option value="men">خياطة رجالي (أثواب وقصات)</option>
+                    <option value="suits">بدلات رسمية وتكسيدو</option>
+                    <option value="women">خياطة وأزياء نسائية</option>
+                </select>
+            </div>
+
+            <div class="form-group-field">
+                <label>رقم هاتف المحل / الواتساب *</label>
+                <input type="text" class="form-input-field" id="shopPhoneInput" placeholder="مثال: 771234567">
+            </div>
+
+            <div class="form-group-field">
+                <label>رابط صورة/شعار المحل</label>
+                <input type="text" class="form-input-field" id="shopImgInput"
+                    placeholder="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400">
+            </div>
+
+            <button class="btn-submit-action" onclick="saveAndSendShopData()">
+                <i class="fas fa-paper-plane"></i> إرسال وحفظ بيانات المحل لجميع العملاء
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. مودال إضافة وعرض منتجات المحل -->
+    <div class="modal-overlay" id="productsModal">
+        <div class="modal-box">
+            <div class="modal-header-row">
+                <div class="modal-title"><i class="fas fa-box-open"></i> إدارة وعرض منتجات المحل</div>
+                <button class="btn-close-modal" onclick="closeProductsModal()">&times;</button>
+            </div>
+
+            <!-- نموذج إضافة منتج جديد -->
+            <div
+                style="background: #111; padding: 15px; border-radius: 14px; border: 1px solid #282828; display: flex; flex-direction: column; gap: 12px;">
+                <div style="font-weight: bold; color: #dbc38b; font-size: 15px;">إضافة منتج جديد لمحل الخياطة:</div>
+
+                <div class="form-group-field">
+                    <label>اسم المنتج *</label>
+                    <input type="text" class="form-input-field" id="prodTitleInput"
+                        placeholder="مثال: ثوب قطن ياباني فاخر مطرز">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group-field">
+                        <label>السعر (ر.س) *</label>
+                        <input type="text" class="form-input-field" id="prodPriceInput" placeholder="350">
+                    </div>
+                    <div class="form-group-field">
+                        <label>الفئة *</label>
+                        <select class="form-select-field" id="prodCategoryInput">
+                            <option value="men">ثياب رجالي</option>
+                            <option value="suits">بدلات رسمية</option>
+                            <option value="women">أزياء نسائية</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group-field">
+                    <label>رابط صورة المنتج</label>
+                    <input type="text" class="form-input-field" id="prodImgInput"
+                        placeholder="رابط صورة المنتج أو اتتركه للافتراضي">
+                </div>
+
+                <button class="btn-submit-action" onclick="addNewProduct()"
+                    style="background: #252525; color: #fff; border: 1px solid #dbc38b;">
+                    <i class="fas fa-plus"></i> إضافة المنتج للقائمة
+                </button>
+            </div>
+
+            <!-- المعاينة للمنتجات الحالية -->
+            <div style="font-weight: bold; color: #ccc; font-size: 14px; margin-top: 5px;">المنتجات المضافة حالياً
+                للمحل:</div>
+            <div class="product-preview-list" id="productsPreviewList">
+                <!-- سيتم تعبئة المنتجات هنا -->
+            </div>
+
+            <button class="btn-submit-action" onclick="sendProductsToCustomers()">
+                <i class="fas fa-paper-plane"></i> إرسال ونشر كافة المنتجات لجميع العملاء
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // تحميل وتهيئة البيانات
+        document.addEventListener('DOMContentLoaded', () => {
+            loadShopForm();
+            renderProductsList();
+        });
+
+        function openShopModal() {
+            document.getElementById('shopModal').classList.add('active');
+        }
+
+        function closeShopModal() {
+            document.getElementById('shopModal').classList.remove('active');
+        }
+
+        function openProductsModal() {
+            renderProductsList();
+            document.getElementById('productsModal').classList.add('active');
+        }
+
+        function closeProductsModal() {
+            document.getElementById('productsModal').classList.remove('active');
+        }
+
+        // 1. منطق حفظ وإرسال بيانات المحل
+        function loadShopForm() {
+            const savedShop = JSON.parse(localStorage.getItem('customTailorShop')) || {
+                name: 'خياطة الأناقة والتميز',
+                desc: 'تفصيل ثياب رجالية ودرعات وسديريات بأعلى جودة',
+                category: 'men',
+                phone: '771234567',
+                img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400'
+            };
+
+            document.getElementById('shopNameInput').value = savedShop.name || '';
+            document.getElementById('shopDescInput').value = savedShop.desc || '';
+            document.getElementById('shopCategoryInput').value = savedShop.category || 'men';
+            document.getElementById('shopPhoneInput').value = savedShop.phone || '';
+            document.getElementById('shopImgInput').value = savedShop.img || '';
+        }
+
+        function saveAndSendShopData() {
+            const name = document.getElementById('shopNameInput').value.trim();
+            const desc = document.getElementById('shopDescInput').value.trim();
+            const category = document.getElementById('shopCategoryInput').value;
+            const phone = document.getElementById('shopPhoneInput').value.trim();
+            const img = document.getElementById('shopImgInput').value.trim() || 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400';
+
+            if (!name) {
+                alert('يرجى كتابة اسم المحل أولاً!');
+                return;
+            }
+
+            const shopData = { name, desc, category, phone, img, updatedAt: new Date().toISOString() };
+            localStorage.setItem('customTailorShop', JSON.stringify(shopData));
+
+            alert('✅ تم إرسال وحفظ اسم المحل (' + name + ') بنجاح! سيتم عرضه الآن فوراً في واجهات اختيار الخياط وواجهات العملاء.');
+            closeShopModal();
+        }
+
+        // 2. منطق إرسال وحفظ منتجات المحل
+        function getStoredProducts() {
+            return JSON.parse(localStorage.getItem('customTailorProducts')) || [
+                { id: 1, title: 'ثوب يمني مطرز فاخر', price: '300 ر.س', category: 'men', img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400' },
+                { id: 2, title: 'بدلة كلاسيكية رسمية', price: '450 ر.س', category: 'suits', img: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400' }
+            ];
+        }
+
+        function renderProductsList() {
+            const listContainer = document.getElementById('productsPreviewList');
+            const products = getStoredProducts();
+
+            if (products.length === 0) {
+                listContainer.innerHTML = '<div style="text-align:center; color:#888; padding:15px;">لا توجد منتجات مضافة بعد</div>';
+                return;
+            }
+
+            listContainer.innerHTML = products.map((p, index) => `
+                <div class="product-item-row">
+                    <div class="product-item-info">
+                        <img src="${p.img}" class="product-item-img" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400'">
+                        <div>
+                            <div style="font-weight:bold; color:#fff; font-size:14px;">${p.title}</div>
+                            <div style="font-size:12px; color:#dbc38b;">${p.price}</div>
+                        </div>
+                    </div>
+                    <button onclick="removeProduct(${index})" style="background:transparent; border:none; color:#ff5555; cursor:pointer; font-size:16px;" title="حذف المنتج">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function addNewProduct() {
+            const title = document.getElementById('prodTitleInput').value.trim();
+            const priceVal = document.getElementById('prodPriceInput').value.trim();
+            const category = document.getElementById('prodCategoryInput').value;
+            let img = document.getElementById('prodImgInput').value.trim();
+
+            if (!title || !priceVal) {
+                alert('يرجى إدخال اسم المنتج والسعر!');
+                return;
+            }
+
+            if (!img) {
+                img = category === 'suits' ? 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400' :
+                    category === 'women' ? 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400' :
+                        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400';
+            }
+
+            const products = getStoredProducts();
+            products.unshift({ id: Date.now(), title, price: priceVal + ' ر.س', category, img });
+            localStorage.setItem('customTailorProducts', JSON.stringify(products));
+
+            document.getElementById('prodTitleInput').value = '';
+            document.getElementById('prodPriceInput').value = '';
+            document.getElementById('prodImgInput').value = '';
+
+            renderProductsList();
+            alert('تم إضافة المنتج (' + title + ') إلى قائمة منتجاتك بنجاح!');
+        }
+
+        function removeProduct(index) {
+            const products = getStoredProducts();
+            products.splice(index, 1);
+            localStorage.setItem('customTailorProducts', JSON.stringify(products));
+            renderProductsList();
+        }
+
+        function sendProductsToCustomers() {
+            const products = getStoredProducts();
+            if (products.length === 0) {
+                alert('يرجى إضافة منتج واحد على الأقل قبل الإرسال!');
+                return;
+            }
+            alert('🚀 تم إرسال ونشر منتجاتك كخياط (' + products.length + ' منتج) بنجاح لجميع واجهات العملاء واختيار الخياط!');
+            closeProductsModal();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - قائمة الخياطين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-dark: #141414;
+            --card-item: #222222;
+            --gold-accent: #d4af37;
+            --gold-hover: #bd9a2d;
+            --text-white: #ffffff;
+            --text-grey: #a0a0a0;
+            --border-color: #333333;
+            --btn-bg: #2d2d2d;
+            --btn-hover: #3d3d3d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* شريط ذهبي علوي ثابت ممتد بالكامل */
+        .global-gold-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--gold-accent);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* شريط التنقل الجانبي لنسخة الويب */
+        .sidebar-nav {
+            width: 260px;
+            background-color: var(--card-dark);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            margin-top: 10px;
+        }
+
+        .sidebar-brand {
+            color: var(--gold-accent);
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 20px;
+            color: var(--text-grey);
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background-color: var(--btn-bg);
+            color: var(--gold-accent);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            padding: 40px 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding-bottom: 90px;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* الهيدر الذهبي المميز مطابقة للصورة تماماً */
+        .gold-header-banner {
+            background-color: var(--gold-accent);
+            color: #000000;
+            border-radius: 20px 20px 10px 10px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(214, 175, 55, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .gold-header-title {
+            font-size: 22px;
+            font-weight: bold;
+            flex: 1;
+            text-align: right;
+        }
+
+        .back-circle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.2s;
+        }
+
+        .back-circle-btn:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* قائمة بطاقات الخياطين مطابقة للصورة */
+        .tailors-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tailor-card {
+            background-color: #262626;
+            border: 1px solid #383838;
+            border-radius: 20px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .tailor-card:hover {
+            background-color: #303030;
+            border-color: var(--gold-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .tailor-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tailor-avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 18px;
+            background-color: #161616;
+            border: 2px solid var(--gold-accent);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 4px;
+        }
+
+        .tailor-avatar svg,
+        .tailor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .tailor-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tailor-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .tailor-desc {
+            font-size: 13px;
+            color: #b0b0b0;
+        }
+
+        .tailor-action {
+            color: var(--gold-accent);
+            font-size: 18px;
+        }
+
+        /* الشريط السفلي للتحكم للجوال */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #121212;
+            border-top: 1px solid var(--border-color);
+            padding: 10px 0;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-grey);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--gold-accent);
+        }
+
+        .bottom-nav-item i {
+            font-size: 20px;
+        }
+
+        .bottom-nav-item.active .icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #2d2a1d;
+            border: 1px solid var(--gold-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar-nav {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: flex;
+            }
+
+            .main-content {
+                padding: 25px 15px 90px 15px;
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="global-gold-bar"></div>
+
+    <!-- شريط التنقل الجانبي للويب -->
+    <nav class="sidebar-nav">
+        <div class="sidebar-brand">مقاسات وتفاصيل</div>
+        <a href="/customer-dashboard.html" class="nav-item"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="/choose-tailor.html" class="nav-item active"><i class="fas fa-cut"></i> قائمة الخياطين</a>
+        <a href="/app-orders.html" class="nav-item"><i class="fas fa-shopping-bag"></i> طلباتي</a>
+        <a href="/payment.html" class="nav-item"><i class="fas fa-credit-card"></i> الدفع</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-container">
+
+            <!-- الهيدر العلوي مطابق للصورة المعطاة -->
+            <div class="gold-header-banner">
+                <a href="/customer-dashboard.html" class="back-circle-btn" title="الرجوع">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="gold-header-title">قائمة الخياطين</div>
+                <div style="width: 36px;"></div>
+            </div>
+
+            <!-- قائمة بطاقات الخياطين -->
+            <div class="tailors-list" id="tailorsContainer">
+
+                <!-- خياط 1: رجالي -->
+                <div class="tailor-card" onclick="window.location.href='/men-thobes.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="54" stroke="#dbc38b" stroke-width="2"
+                                    stroke-dasharray="4 2" />
+                                <circle cx="60" cy="60" r="46" fill="#181818" stroke="#dbc38b" stroke-width="1.5" />
+                                <path d="M42 42L78 78M78 42L42 78" stroke="#dbc38b" stroke-width="3.5"
+                                    stroke-linecap="round" />
+                                <circle cx="39" cy="39" r="6" stroke="#dbc38b" stroke-width="2" />
+                                <circle cx="81" cy="39" r="6" stroke="#dbc38b" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">محل الناصر للخياطة 👔</div>
+                            <div class="tailor-desc">لخياطة الثياب الرجالية - أثواب وقصات فريدة</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 2: نسائي -->
+                <div class="tailor-card" onclick="window.location.href='/women-dresses.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="54" stroke="#f472b6" stroke-width="2" />
+                                <circle cx="60" cy="60" r="46" fill="#181818" stroke="#dbc38b" stroke-width="1.5" />
+                                <path d="M40 45L48 55L60 38L72 55L80 45L76 75H44L40 45Z" fill="url(#goldGradQueen2)"
+                                    stroke="#dbc38b" stroke-width="2" />
+                                <defs>
+                                    <linearGradient id="goldGradQueen2" x1="40" y1="38" x2="80" y2="75"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#dbc38b" />
+                                        <stop offset="1" stop-color="#f472b6" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">دار الملكة للخياطة النسائية 👗</div>
+                            <div class="tailor-desc">فساتين سهرة، عبايات، وجلابيات راقية</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 3: رجالي -->
+                <div class="tailor-card" onclick="window.location.href='/men-thobes.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2" />
+                                <path d="M75 30L45 80" stroke="#dbc38b" stroke-width="3.5" stroke-linecap="round" />
+                                <path d="M75 30C78 27 82 27 83 30C84 33 81 37 77 37" stroke="#dbc38b"
+                                    stroke-width="2" />
+                                <path d="M80 33C65 45 40 40 30 55C20 70 40 85 55 92" stroke="#60a5fa" stroke-width="2.5"
+                                    stroke-dasharray="3 2" fill="none" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">خياطة الأناقة والتميز 👔</div>
+                            <div class="tailor-desc">تفصيل ثياب رجالية ودرعات وسديريات</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 4: نسائي -->
+                <div class="tailor-card" onclick="window.location.href='/women-dresses.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#f472b6" stroke-width="2" />
+                                <rect x="42" y="36" width="36" height="44" rx="6" stroke="#dbc38b" stroke-width="2"
+                                    fill="#252525" />
+                                <path d="M42 46H78M42 54H78M42 62H78M42 70H78" stroke="#f472b6" stroke-width="2.5" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">مشغل الحرير للعبايات والتفصيل 👗</div>
+                            <div class="tailor-desc">متخصصون في تفصيل العبايات والجلابيات والفساتين</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 5: رجالي -->
+                <div class="tailor-card" onclick="window.location.href='/men-thobes.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2.5" />
+                                <circle cx="60" cy="52" r="26" stroke="#dbc38b" stroke-width="3"
+                                    stroke-dasharray="4 2" />
+                                <path d="M50 45L60 35L70 45V65H50V45Z" fill="#dbc38b" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">خياط الذهبي للمقاسات 👔</div>
+                            <div class="tailor-desc">خياطة راقية وثياب فاخرة حسب الطلب</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 6: نسائي -->
+                <div class="tailor-card" onclick="window.location.href='/women-dresses.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2" />
+                                <path d="M60 32C60 28 64 26 66 29C68 32 64 36 60 36V40L35 53H85L60 40Z" stroke="#f472b6"
+                                    stroke-width="2.5" stroke-linejoin="round" />
+                                <path d="M42 53L36 80H84L78 53" stroke="#dbc38b" stroke-width="2" fill="none" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">أتيليه الأناقة النسائي 👗</div>
+                            <div class="tailor-desc">تفصيل وتصميم فساتين المناسبات والأعراس</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 7: بدلات رسمية -->
+                <div class="tailor-card" onclick="window.location.href='/men-suits.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#34d399" stroke-width="2" />
+                                <path d="M45 42H75L60 78L45 42Z" fill="#1f2937" stroke="#dbc38b" stroke-width="1.5" />
+                                <path d="M55 42L60 55L65 42" stroke="#34d399" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">معرض السفير لتفصيل البدلات 💼</div>
+                            <div class="tailor-desc">تفصيل البدلات الرسمية وبدل الاجتماعات</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- خياط 8: بدل عرسان وتكسيدو -->
+                <div class="tailor-card" onclick="window.location.href='/men-suits.html'">
+                    <div class="tailor-info">
+                        <div class="tailor-avatar">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="52" fill="#181818" stroke="#dbc38b" stroke-width="2.5" />
+                                <path d="M40 38L60 48L80 38V72L60 84L40 72V38Z" fill="#111827" stroke="#dbc38b"
+                                    stroke-width="2" />
+                                <path d="M54 45L60 56L66 45" stroke="#dbc38b" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="tailor-details">
+                            <div class="tailor-name">دار البدلة الملكية للعرسان 👔</div>
+                            <div class="tailor-desc">تفصيل بدل عرسان وتكسيدو بأرقى الأقمشة</div>
+                        </div>
+                    </div>
+                    <div class="tailor-action">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- الشريط السفلي للتحكم للجوال -->
+    <nav class="bottom-nav">
+        <a href="/customer-dashboard.html" class="bottom-nav-item">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="/choose-tailor.html" class="bottom-nav-item active">
+            <div class="icon-circle">
+                <i class="fas fa-cut"></i>
+            </div>
+            <span>قائمة الخياط</span>
+        </a>
+        <a href="/app-orders.html" class="bottom-nav-item">
+            <i class="fas fa-shopping-bag"></i>
+            <span>طلبات الخياطة</span>
+        </a>
+        <a href="/payment.html" class="bottom-nav-item">
+            <i class="fas fa-credit-card"></i>
+            <span>الدفع</span>
+        </a>
+    </nav>
+
+    <script>
+        function selectTailor(id, name) {
+            window.location.href = "/men-thobes.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const customShop = JSON.parse(localStorage.getItem('customTailorShop'));
+            const customProducts = JSON.parse(localStorage.getItem('customTailorProducts')) || [];
+            const container = document.getElementById('tailorsContainer');
+
+            if (customShop && container) {
+                const pageLink = customShop.category === 'women' ? 'women-dresses.html' :
+                    customShop.category === 'suits' ? 'men-suits.html' : 'men-thobes.html';
+
+                const cardHTML = `
+                    <div class="tailor-card" onclick="window.location.href='/${pageLink}'" style="border: 2px solid #dbc38b; background-color: #1e1e1e;">
+                        <div class="tailor-info">
+                            <div class="tailor-avatar">
+                                <img src="${customShop.img}" alt="${customShop.name}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400'">
+                            </div>
+                            <div class="tailor-details">
+                                <div class="tailor-name" style="color: var(--gold-accent);">${customShop.name} ✨ (محل جديد)</div>
+                                <div class="tailor-desc">${customShop.desc}</div>
+                                ${customProducts.length > 0 ? `
+                                    <div style="font-size:12px; color:#fff; margin-top:4px;">
+                                        🛍️ المنتجات: <span style="color:#dbc38b;">${customProducts.map(p => p.title).join(', ')}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        <div class="tailor-action">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </div>
+                `;
+
+                container.insertAdjacentHTML('afterbegin', cardHTML);
+            }
+        });
+    </script>
+</body>
+
+</html>

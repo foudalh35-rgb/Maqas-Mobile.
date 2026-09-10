@@ -45,3 +45,57 @@ public record UpdateMeasurementSessionDto(int CustomerId, int TypeId, string Not
 // --- DTOs الخاصة بالرسائل والدردشة ---
 public record SendMessageDto(int SenderId, string SenderRole, int ReceiverId, int? SessionId, string MessageText);
 public record ChatMessageResponseDto(int MessageId, int SenderId, string SenderRole, int ReceiverId, int? SessionId, string MessageText, DateTime SentAt, bool IsRead);
+
+// --- DTOs الخاصة بالطلبات (Orders) ---
+public record CreateOrderDto(
+    string OrderNumber,
+    string CustomerName,
+    string CustomerPhone,
+    string TailorName,
+    string ItemTitle,
+    string ProductImg,
+    string Fabric,
+    string Date,
+    string ReceiptDate,
+    string Price,
+    string PaidAmount,
+    string Wallet,
+    string RefNo,
+    string Status
+);
+
+public record UpdateOrderDto(
+    string? CustomerName,
+    string? CustomerPhone,
+    string? TailorName,
+    string? ItemTitle,
+    string? ProductImg,
+    string? Fabric,
+    string? Price,
+    string? PaidAmount,
+    string? Wallet,
+    string? RefNo,
+    string? Status
+);
+
+// --- DTOs الخاصة بالمنتجات (Products) ---
+public record CreateProductDto(
+    string Name,
+    string Description,
+    decimal Price,
+    int StockQuantity,
+    string Category,
+    string ImageUrl,
+    bool IsActive
+);
+
+public record UpdateProductDto(
+    string? Name,
+    string? Description,
+    decimal? Price,
+    int? StockQuantity,
+    string? Category,
+    string? ImageUrl,
+    bool? IsActive
+);
+

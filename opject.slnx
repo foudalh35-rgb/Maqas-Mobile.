@@ -3,7 +3,7 @@
     <Project Path="Maqas.Domain/Maqas.Domain.csproj" />
     <Project Path="Maqas.Application/Maqas.Application.csproj" />
     <Project Path="Maqas.Infrastructure/Maqas.Infrastructure.csproj" />
-    <Project Path="Maqas.Web/Maqas.Web.csproj" />
+    <Project Path="Maqas.API/Maqas.API.csproj" />
+    <Project Path="Maqas.MVC/Maqas.MVC.csproj" />
   </Folder>
-  <Project Path="WebApplication1/WebApplication1.csproj" />
 </Solution>

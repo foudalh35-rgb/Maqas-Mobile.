@@ -18,11 +18,24 @@ public class ProductsController : ControllerBase
 
     // GET: api/products
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] string? category = null)
+    {
+        var query = _context.Products.Where(p => p.IsActive);
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            query = query.Where(p => p.Category.Contains(category));
+        }
+        var products = await query.OrderBy(p => p.Id).ToListAsync();
+        return Ok(products);
+    }
+
+    // GET: api/products/category/ثوب%20رجالي
+    [HttpGet("category/{category}")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(string category)
     {
         var products = await _context.Products
-            .Where(p => p.IsActive)
-            .OrderByDescending(p => p.CreatedAt)
+            .Where(p => p.IsActive && p.Category.Contains(category))
+            .OrderBy(p => p.Id)
             .ToListAsync();
         return Ok(products);
     }

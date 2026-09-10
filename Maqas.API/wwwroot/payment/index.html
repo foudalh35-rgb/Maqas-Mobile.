@@ -1,0 +1,1365 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - طرق الدفع والمحافظ الإلكترونية</title>
+    <!-- استدعاء مكتبة الأيقونات الرسمية لتعمل مباشرة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        /* زر فتح القائمة الجانبية (الدراور) */
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        /* قائمة الأيقونات العمودية */
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* 2. منطقة المحتوى الرئيسي */
+        .main-wrapper {
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+
+        /* 3. الهيدر الذهبي الممتد */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 40px 0;
+        }
+
+        .header-title {
+            font-size: 34px;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 4. حاوية طرق الدفع (شبكة من عمودين) */
+        .grid-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 40px;
+            flex: 1;
+        }
+
+        /* 5. تصميم بطاقات المحافظ الفاخرة */
+        .payment-luxury-card {
+            background: #161616;
+            border: 1px solid rgba(219, 195, 139, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            width: 100%;
+        }
+
+        .payment-luxury-card:hover {
+            transform: translateY(-8px);
+            border-color: #dbc38b;
+            background: #1c1c1c;
+            box-shadow: 0 20px 45px rgba(219, 195, 139, 0.25);
+        }
+
+        .payment-card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .wallet-logo-frame {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: #0d0d0d;
+            border: 2px solid #dbc38b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(219, 195, 139, 0.3);
+            padding: 6px;
+        }
+
+        .wallet-logo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .wallet-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .wallet-subtext {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+
+        .account-number-box {
+            background: #222222;
+            border: 1px dashed #dbc38b;
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .account-num-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #dbc38b;
+            letter-spacing: 1px;
+        }
+
+        .copy-btn {
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #c4a768;
+        }
+
+        .pay-action-btn {
+            background: #252525;
+            color: #ffffff;
+            border: 1px solid #333333;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pay-action-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            border-color: #dbc38b;
+        }
+
+        /* 6. القائمة الجانبية (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-drawer-btn:hover {
+            color: #ff7777;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.2);
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 14px;
+            background: #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #252525;
+            color: #dbc38b;
+            padding-right: 22px;
+        }
+
+        .drawer-menu li a.highlight-menu {
+            border: 1px solid #dbc38b;
+            background: rgba(219, 195, 139, 0.1);
+            color: #dbc38b;
+        }
+
+        .drawer-menu li a.highlight-menu:hover {
+            background: #dbc38b;
+            color: #000000;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+
+        /* 7. نوافذ تأكيد الدفع والتقرير الشامل (Modal System) */
+        .modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 750px;
+            max-height: 90vh;
+            background: #161616;
+            border: 2px solid #dbc38b;
+            border-radius: 25px;
+            padding: 35px;
+            z-index: 1001;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow-y: auto;
+            color: #ffffff;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-card.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            color: #dbc38b;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .form-group-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .form-group-row label {
+            font-size: 15px;
+            color: #cccccc;
+            font-weight: 600;
+        }
+
+        .modal-input {
+            background: #222222;
+            border: 1px solid #444444;
+            border-radius: 12px;
+            padding: 14px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            width: 100%;
+        }
+
+        .modal-input:focus {
+            border-color: #dbc38b;
+            background: #2a2a2a;
+        }
+
+        /* تقرير الفاتورة والقياسات */
+        .report-section {
+            background: #1f1f1f;
+            border: 1px solid #333333;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        .report-section-title {
+            font-size: 16px;
+            color: #dbc38b;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed #444;
+            padding-bottom: 6px;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .report-item {
+            background: #272727;
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .report-item-label {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .report-item-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .print-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .print-btn {
+            flex: 1;
+            background: #dbc38b;
+            color: #000000;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #c4a768;
+        }
+
+        .secondary-btn {
+            flex: 1;
+            background: #282828;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .secondary-btn:hover {
+            background: #333;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #reportModal,
+            #reportModal * {
+                visibility: visible;
+            }
+
+            #reportModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            .report-section,
+            .report-item {
+                background: #f5f5f5 !important;
+                color: #000000 !important;
+                border: 1px solid #ccc !important;
+            }
+
+            .report-item-val,
+            .modal-header h2,
+            .report-section-title {
+                color: #000000 !important;
+            }
+
+            .print-actions,
+            .modal-close-btn {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                background-color: #0d0d0d;
+                margin-right: 0;
+                width: 100%;
+                padding-bottom: 120px;
+            }
+
+            .web-sidebar {
+                bottom: 0;
+                top: auto;
+                right: 0;
+                width: 100%;
+                height: 75px;
+                flex-direction: row;
+                padding: 0 20px;
+                border-top: 1px solid #222222;
+                border-left: none;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .sidebar-item.active::before {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .report-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت رأساً من الأعلى إلى الأسفل -->
+    <aside class="web-sidebar">
+        <!-- زر فتح القائمة الجانبية (الدراور) -->
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- الأيقونات العمودية الممتدة على اليمين -->
+        <nav class="sidebar-nav">
+            <a class="sidebar-item" onclick="window.location.href='/customer-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/choose-tailor.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                    <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                    <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                </svg>
+                <span>الخياطين</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/app-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+
+        <div></div>
+    </aside>
+
+    <!-- 2. منطقة المحتوى الرئيسي -->
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">طرق الدفع والمحافظ الإلكترونية</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <!-- حاوية بطاقات الدفع -->
+        <main class="grid-container">
+
+            <!-- 1. كارت كريمي حاسب -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/kuraimi_jawal.png" alt="كريمي حاسب"
+                            onerror="this.src='/images/kuraimi_wallet.png'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">كريمي حاسب</div>
+                        <div class="wallet-subtext">مصرف الكريمي للتمويل الأصغر</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="kuraimi-acc">3012345678</span>
+                    <button class="copy-btn" onclick="copyAccount('kuraimi-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('كريمي حاسب', '3012345678')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+            <!-- 2. كارت محفظة جوالي -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/jawali.png" alt="محفظة جوالي"
+                            onerror="this.src='/images/jawali_wallet.png'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">محفظة جوالي</div>
+                        <div class="wallet-subtext">بنك اليمن والكويت</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="jawali-acc">770123456</span>
+                    <button class="copy-btn" onclick="copyAccount('jawali-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('محفظة جوالي', '770123456')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+            <!-- 3. كارت ون كاش (OneCash) -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/one_cash.png" alt="OneCash"
+                            onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=100'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">OneCash (ون كاش)</div>
+                        <div class="wallet-subtext">محفظة الدفع الإلكتروني السريع</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="onecash-acc">775544332</span>
+                    <button class="copy-btn" onclick="copyAccount('onecash-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('OneCash ون كاش', '775544332')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+            <!-- 4. كارت محفظة كاش -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/cash.png" alt="محفظة كاش"
+                            onerror="this.src='https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=100'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">محفظة كاش</div>
+                        <div class="wallet-subtext">البنك اليمني للإنشاء والتعمير</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="cash-acc">771987654</span>
+                    <button class="copy-btn" onclick="copyAccount('cash-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('محفظة كاش', '771987654')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+            <!-- 5. كارت محفظة جيب (Jeeb) -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/jaib.png" alt="محفظة جيب"
+                            onerror="this.src='/images/jeeb_wallet.png'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">محفظة جيب (Jeeb)</div>
+                        <div class="wallet-subtext">بنك التضامن الإسلامي</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="jeeb-acc">773322110</span>
+                    <button class="copy-btn" onclick="copyAccount('jeeb-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('محفظة جيب Jeeb', '773322110')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+            <!-- 6. كارت محفظة فلوسك (Floosak) -->
+            <div class="payment-luxury-card">
+                <div class="payment-card-header">
+                    <div class="wallet-logo-frame">
+                        <img src="/images/wallets/floosak.png" alt="محفظة فلوسك"
+                            onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=100'">
+                    </div>
+                    <div>
+                        <div class="wallet-title">محفظة فلوسك (Floosak)</div>
+                        <div class="wallet-subtext">مصرف اليمن البحر الأحمر</div>
+                    </div>
+                </div>
+                <div class="account-number-box">
+                    <span class="account-num-text" id="floosak-acc">774433221</span>
+                    <button class="copy-btn" onclick="copyAccount('floosak-acc')">نسخ</button>
+                </div>
+                <button class="pay-action-btn" onclick="openPaymentConfirmation('محفظة فلوسك Floosak', '774433221')">
+                    <i class="fas fa-paper-plane"></i> إرسال إشعار الدفع بالتحويل
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- نافذة 1: لإدخال إشعار التحويل ورقم العملية -->
+    <div class="modal-card" id="confirmModal">
+        <div class="modal-header">
+            <h2><i class="fas fa-file-invoice-dollar"></i> إرسال إشعار الدفع بالتحويل</h2>
+            <button class="modal-close-btn" onclick="closeAllModals()">&times;</button>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 15px;">
+            <div
+                style="width: 95px; height: 95px; border-radius: 18px; border: 2px solid #dbc38b; overflow: hidden; margin: 0 auto 8px auto; background: #1f1f1f; box-shadow: 0 0 12px rgba(219,195,139,0.3);">
+                <img id="confirmCostumeImg" src="/images/thobe_saudi.png" alt="الزي المختار"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div id="confirmCostumeTitle" style="color: #dbc38b; font-weight: bold; font-size: 15px;">ثوب تفصيل مخصص
+            </div>
+        </div>
+
+        <form id="payForm" onsubmit="submitPaymentNotice(event)">
+            <div class="form-group-row">
+                <label>المحفظة المختارة</label>
+                <input type="text" class="modal-input" id="selectedWalletInput" readonly
+                    style="color: #dbc38b; font-weight: bold;">
+            </div>
+            <div class="form-group-row">
+                <label>رقم الحساب المحوّل إليه</label>
+                <input type="text" class="modal-input" id="selectedAccInput" readonly style="color: #888;">
+            </div>
+            <div class="form-group-row">
+                <label>رقم عملية التحويل / الرقم المرجعي <span style="color:#ff5555;">*</span></label>
+                <input type="text" class="modal-input" id="refNoInput"
+                    placeholder="أدخل رقم العملية المكون من عدة أرقام" required>
+            </div>
+            <div class="form-group-row">
+                <label>اسم المحول بالكامل <span style="color:#ff5555;">*</span></label>
+                <input type="text" class="modal-input" id="senderNameInput" placeholder="أدخل الاسم الرباعي للمحوّل"
+                    required>
+            </div>
+            <div class="form-group-row">
+                <label>إرفاق صورة إشعار التحويل (لقطة الشاشة السند)</label>
+                <input type="file" class="modal-input" accept="image/*" id="receiptFileInput">
+            </div>
+
+            <button type="submit" class="print-btn" style="width: 100%; margin-top: 15px;">
+                <i class="fas fa-check-circle"></i> تأكيد الحوالة والحفظ في التطبيق والدراور
+            </button>
+        </form>
+    </div>
+
+    <!-- نافذة 2: التقرير الشامل المحفوظ والقياسات والفاتورة الرسمية -->
+    <div class="modal-card" id="reportModal">
+        <div class="modal-header">
+            <h2><i class="fas fa-scroll"></i> التقرير الشامل وفاتورة التفصيل المحفوظة</h2>
+            <button class="modal-close-btn" onclick="closeAllModals()">&times;</button>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 15px;">
+            <div
+                style="width: 110px; height: 110px; border-radius: 20px; border: 2px solid #dbc38b; overflow: hidden; margin: 0 auto 10px auto; background: #1f1f1f; box-shadow: 0 0 15px rgba(219,195,139,0.3);">
+                <img id="repProductImg" src="/images/thobe_saudi.png" alt="الزي المختار"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div
+                style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 8px 18px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; font-weight: bold; font-size: 14px;">
+                <i class="fas fa-check-circle"></i> تم حفظ التقرير بداخل ذاكرة التطبيق والدراور بنجاح 💾
+            </div>
+        </div>
+
+        <!-- 1. تفاصيل الطلب والحساب -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-info-circle"></i> بيانات الطلب والعميل</div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">رقم التقرير / الطلب</div>
+                    <div class="report-item-val" id="repOrderId">#MQ-8942</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">اسم العميل</div>
+                    <div class="report-item-val" id="repCustomerName">صالح الكميم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">تاريخ الطلب</div>
+                    <div class="report-item-val" id="repDate">2026/8/23</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">الخياط المختار</div>
+                    <div class="report-item-val" id="repTailor">محل الناصر للخياطة</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">نوع الثوب والزي</div>
+                    <div class="report-item-val" id="repItem">ثوب سعودي فاخر</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">القماش والتفاصيل</div>
+                    <div class="report-item-val">قطن أبيض ياباني (رقم 12)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. جدول القياسات المحفوظة بالكامل -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-ruler-combined"></i> جدول القياسات التفصيلية الكاملة
+                المحفوظة</div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">الطول الكلي</div>
+                    <div class="report-item-val">145 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">عرض الكتف</div>
+                    <div class="report-item-val">46 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول لجد</div>
+                    <div class="report-item-val">78 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">وسع الصدر</div>
+                    <div class="report-item-val">108 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">دوران الرقبة</div>
+                    <div class="report-item-val">40 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">برد</div>
+                    <div class="report-item-val">15 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول اليد</div>
+                    <div class="report-item-val">62 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">طول الكتف الفرعي</div>
+                    <div class="report-item-val">18 سم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">وسع اليد / الكفة</div>
+                    <div class="report-item-val">22 سم</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. تفاصيل الحساب والدفع -->
+        <div class="report-section">
+            <div class="report-section-title"><i class="fas fa-file-invoice"></i> تفاصيل الحساب والحوالة الإلكترونية
+            </div>
+            <div class="report-grid">
+                <div class="report-item">
+                    <div class="report-item-label">المبلغ الإجمالي</div>
+                    <div class="report-item-val" style="color:#dbc38b;">$35 (15,000 ريال)</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">المحفظة المحول منها</div>
+                    <div class="report-item-val" id="repWallet">كريمي حاسب</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">رقم عملية التحويل (المرجع)</div>
+                    <div class="report-item-val" id="repRefNo" style="color:#2ecc71;">#99482716</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">اسم المحول</div>
+                    <div class="report-item-val" id="repSender">صالح الكميم</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">حالة الحوالة والطلب</div>
+                    <div class="report-item-val" style="color:#2ecc71;">مكتمل وموثق</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-item-label">الحفظ المباشر</div>
+                    <div class="report-item-val" style="color:#dbc38b;">محفوظ بذاكرة التطبيق والدراور 💾</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="print-actions">
+            <button class="print-btn" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة التقرير / حفظ PDF
+            </button>
+            <button class="secondary-btn" onclick="window.location.href='/app-orders.html'">
+                <i class="fas fa-shopping-bag"></i> الذهاب لصفحة طلباتي
+            </button>
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>مقاسك</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/customer-dashboard.html">
+                    <span>الرئيسية</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html" class="highlight-menu">
+                    <span>📑 تقارير التفصيل المحفوظة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/app-orders.html">
+                    <span>طلباتي</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 16 14"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/payment.html">
+                    <span>طريقة الدفع</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/ready-sizes.html">
+                    <span>حفظ</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('تم تنفيذ العملية')">
+                    <span>حذف</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/choose-tailor.html">
+                    <span>قائمة الخياطين</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="alert('لا توجد إشعارات جديدة حالياً')">
+                    <span>الاشعارات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <script>
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function copyAccount(elementId) {
+            const accNum = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(accNum).then(() => {
+                alert('تم نسخ رقم الحساب بنجاح: ' + accNum);
+            });
+        }
+
+        function openPaymentConfirmation(walletName, accNo) {
+            document.getElementById('selectedWalletInput').value = walletName;
+            document.getElementById('selectedAccInput').value = accNo;
+            document.getElementById('refNoInput').value = '';
+            document.getElementById('senderNameInput').value = '';
+
+            let pendingData = {};
+            try {
+                const stored = localStorage.getItem('pendingOrderData');
+                if (stored) pendingData = JSON.parse(stored);
+            } catch (e) { }
+
+            let costumeImg = pendingData.productImg || pendingData.ProductImg || pendingData.img || pendingData.image || pendingData.productImage || '/images/thobe_saudi.png';
+            if (costumeImg.startsWith('assets/images/')) {
+                costumeImg = costumeImg.replace('assets/images/', '/images/');
+            }
+            const costumeTitle = pendingData.serviceType || pendingData.itemTitle || 'ثوب تفصيل مخصص';
+
+            if (document.getElementById('confirmCostumeImg')) {
+                const imgEl = document.getElementById('confirmCostumeImg');
+                imgEl.src = costumeImg;
+                imgEl.onerror = function () { this.src = '/images/thobe_saudi.png'; };
+            }
+            if (document.getElementById('confirmCostumeTitle')) {
+                document.getElementById('confirmCostumeTitle').innerText = costumeTitle;
+            }
+
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function closeAllModals() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('confirmModal').classList.remove('active');
+            document.getElementById('reportModal').classList.remove('active');
+        }
+
+        async function submitPaymentNotice(event) {
+            event.preventDefault();
+
+            const wallet = document.getElementById('selectedWalletInput').value || 'كريمي حاسب';
+            const refNoInput = document.getElementById('refNoInput').value ? document.getElementById('refNoInput').value.trim() : '';
+            const senderInput = document.getElementById('senderNameInput').value ? document.getElementById('senderNameInput').value.trim() : '';
+
+            const autoRef = refNoInput || Math.floor(100000 + Math.random() * 900000).toString();
+            const orderId = '#MQ-' + Math.floor(10000 + Math.random() * 90000);
+            const dateStr = new Date().toLocaleDateString('ar-YE');
+
+            let pendingData = {};
+            try {
+                const stored = localStorage.getItem('pendingOrderData');
+                if (stored) pendingData = JSON.parse(stored);
+            } catch (e) { }
+
+            const sampleNames = ["صالح الكميم", "فؤاد العولقي", "عبدالله باوزير", "عمر اليافعي", "أحمد السقاف"];
+            const randomCustomer = sampleNames[Math.floor(Math.random() * sampleNames.length)] + ' (#' + Math.floor(100 + Math.random() * 900) + ')';
+            const sender = senderInput || pendingData.custName || randomCustomer;
+
+            let receiptDateVal = pendingData.receiptDate || dateStr;
+            let costumeImg = pendingData.productImg || pendingData.ProductImg || pendingData.img || pendingData.image || pendingData.productImage || '/images/thobe_saudi.png';
+            if (costumeImg.startsWith('assets/images/')) {
+                costumeImg = costumeImg.replace('assets/images/', '/images/');
+            }
+
+            const newReport = {
+                orderNumber: orderId,
+                customerName: sender,
+                customerPhone: pendingData.custPhone || ('770' + Math.floor(100000 + Math.random() * 900000)),
+                tailorName: pendingData.tailorName || 'محل الناصر للخياطة',
+                itemTitle: pendingData.serviceType || pendingData.itemTitle || 'ثوب سعودي فاخر',
+                productImg: costumeImg,
+                fabric: pendingData.fabric || 'قطن أبيض ياباني (رقم 12)',
+                date: dateStr,
+                receiptDate: receiptDateVal,
+                price: pendingData.totalAmount || '$35',
+                paidAmount: pendingData.paidAmount || pendingData.totalAmount || '$35',
+                wallet: wallet,
+                refNo: autoRef,
+                status: 'قيد التفصيل'
+            };
+
+            // 1. الحفظ في قاعدة البيانات المشتركة (API)
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newReport)
+                });
+                if (response.ok) {
+                    const savedDbOrder = await response.json();
+                    newReport.id = savedDbOrder.id;
+                }
+            } catch (err) {
+                console.warn('تعذر الاتصال بالخادم لحفظ الطلب، جاري الحفظ المحلي:', err);
+            }
+
+            // 2. الحفظ التزامني في localStorage كنسخة احتياطية سريعة
+            let existingOrders = JSON.parse(localStorage.getItem('maqas_saved_reports') || '[]');
+            existingOrders.unshift(newReport);
+            localStorage.setItem('maqas_saved_reports', JSON.stringify(existingOrders));
+
+            // 3. تحديث بيانات الواجهة للتقرير الظاهر
+            if (document.getElementById('repProductImg')) {
+                const imgEl = document.getElementById('repProductImg');
+                imgEl.src = newReport.productImg;
+                imgEl.onerror = function () { this.src = '/images/thobe_saudi.png'; };
+            }
+            document.getElementById('repOrderId').innerText = newReport.orderNumber || orderId;
+            document.getElementById('repCustomerName').innerText = newReport.customerName;
+            document.getElementById('repSender').innerText = sender;
+            document.getElementById('repDate').innerText = dateStr;
+            document.getElementById('repTailor').innerText = newReport.tailorName;
+            document.getElementById('repItem').innerText = newReport.itemTitle;
+            document.getElementById('repWallet').innerText = wallet;
+            document.getElementById('repRefNo') ? document.getElementById('repRefNo').innerText = '#' + autoRef : null;
+
+            // إغلاق النافذة الأولى وفتح تقرير التوثيق الشامل المحفوظ
+            document.getElementById('confirmModal').classList.remove('active');
+            document.getElementById('reportModal').classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

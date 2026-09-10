@@ -1,0 +1,1504 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاسات وتفاصيل - إدخال كافة خانات المقاسات (طابق Adobe XD)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-dark: #141414;
+            --card-item: #1c1c1c;
+            --gold-accent: #d4af37;
+            --gold-hover: #bd9a2d;
+            --text-white: #ffffff;
+            --text-grey: #a0a0a0;
+            --border-color: #2e2e2e;
+            --btn-bg: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .global-gold-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--gold-accent);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* القائمة الجانبية للخياط */
+        .sidebar-nav {
+            width: 270px;
+            background-color: var(--card-dark);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            margin-top: 10px;
+            position: sticky;
+            top: 10px;
+            height: calc(100vh - 10px);
+        }
+
+        .sidebar-brand {
+            color: var(--gold-accent);
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 20px;
+            color: var(--text-grey);
+            text-decoration: none;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background-color: #262626;
+            color: var(--gold-accent);
+            border-right: 4px solid var(--gold-accent);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 35px 30px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 90px;
+            position: relative;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        /* الهيدر الذهبي العلوي المطابق للـ Prototype */
+        .gold-header-banner {
+            background-color: var(--gold-accent);
+            color: #000000;
+            border-radius: 20px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 18px rgba(214, 175, 55, 0.25);
+        }
+
+        .gold-header-title {
+            font-size: 22px;
+            font-weight: bold;
+            flex: 1;
+            text-align: right;
+        }
+
+        .header-icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        /* شريط المتطلبات المتسلسل */
+        .step-nav-bar {
+            display: flex;
+            background-color: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 6px;
+            gap: 6px;
+        }
+
+        .step-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 12px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step-tab.active {
+            background-color: var(--gold-accent);
+            color: #000;
+        }
+
+        .view-section {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .view-section.active {
+            display: flex;
+        }
+
+        /* 1. قائمة العملاء */
+        .search-box-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: #161616;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 14px 20px 14px 45px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--gold-accent);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .customer-card-item {
+            background-color: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .customer-card-item:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-2px);
+            background-color: #1f1f1f;
+        }
+
+        .cust-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cust-avatar-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-accent);
+            object-fit: cover;
+        }
+
+        .cust-info-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cust-fullname {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .cust-date {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* 2. واجهة الاختيار (الكروت بجميع الفئات الظاهرة بالصورة) */
+        .categories-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .cat-select-card {
+            background-color: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .cat-select-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(214, 175, 55, 0.25);
+        }
+
+        .cat-img-banner {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--gold-accent);
+        }
+
+        .cat-card-body {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+        }
+
+        .cat-title-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .cat-badge-tag {
+            background-color: #242424;
+            color: var(--gold-accent);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-accent);
+        }
+
+        /* 3. واجهة الخانات العريضة المطابقة تماماً لصور Adobe XD */
+        .form-section-card {
+            background-color: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 22px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .cust-header-info-bar {
+            background-color: #101010;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cust-header-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .cust-header-item span:first-child {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .cust-header-item span:last-child {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--gold-accent);
+        }
+
+        /* شبكات التوزيع للخانات المطابقة للصور */
+        .form-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .form-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 13.5px;
+            color: #d0d0d0;
+            font-weight: 600;
+        }
+
+        .form-input,
+        .form-select {
+            background-color: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 12px 14px;
+            color: #fff;
+            font-size: 14.5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--gold-accent);
+        }
+
+        .btn-submit-size {
+            background-color: var(--gold-accent);
+            color: #000;
+            font-weight: bold;
+            padding: 16px;
+            border-radius: 16px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 18px rgba(214, 175, 55, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-submit-size:hover {
+            background-color: var(--gold-hover);
+        }
+
+        /* زر إضافة عميل عائم [ + 👤 ] */
+        .floating-add-cust-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #b89325);
+            color: #000;
+            border: none;
+            box-shadow: 0 6px 22px rgba(214, 175, 55, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .floating-add-cust-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* النوافذ المودال */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .add-cust-box {
+            background-color: #181818;
+            border: 1px solid var(--gold-accent);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .confirmation-box {
+            background-color: #181818;
+            border: 1px solid var(--gold-accent);
+            border-radius: 26px;
+            width: 100%;
+            max-width: 460px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9);
+        }
+
+        .confirm-title-badge {
+            background-color: var(--gold-accent);
+            color: #000;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 24px;
+            border-radius: 20px;
+            width: 100%;
+        }
+
+        .thobe-illustration-card {
+            background-color: #101010;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .confirm-details-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 15px;
+            color: #ddd;
+        }
+
+        .confirm-actions-row {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .btn-confirm-print {
+            flex: 1;
+            background-color: var(--gold-accent);
+            color: #000;
+            font-weight: bold;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn-confirm-continue {
+            flex: 1;
+            background-color: #262626;
+            color: #fff;
+            font-weight: bold;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #444;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        /* الشريط السفلي للجوال */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #121212;
+            border-top: 1px solid var(--border-color);
+            padding: 10px 0;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-grey);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--gold-accent);
+        }
+
+        .bottom-nav-item i {
+            font-size: 20px;
+        }
+
+        .bottom-nav-item.active .icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #2d2a1d;
+            border: 1px solid var(--gold-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 850px) {
+            .form-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories-selection-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar-nav {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: flex;
+            }
+
+            .main-content {
+                padding: 16px 12px 90px 12px;
+            }
+
+            .form-grid-4,
+            .form-grid-3,
+            .form-grid-2,
+            .categories-selection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-add-cust-btn {
+                bottom: 80px;
+                left: 20px;
+            }
+        }
+
+        /* 1. الشريط الجانبي الأيمن المثبت (Vertical Right Sidebar) */
+        .web-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 110px;
+            height: 100vh;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+            border-left: 1px solid #222222;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            z-index: 950;
+        }
+
+        .sidebar-menu-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(219, 195, 139, 0.3);
+            color: #dbc38b;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu-btn:hover {
+            background: #dbc38b;
+            color: #000000;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(219, 195, 139, 0.5);
+        }
+
+        .sidebar-nav-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888888;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item svg {
+            stroke: #888888;
+            transition: stroke 0.3s, transform 0.3s;
+        }
+
+        .sidebar-item.active {
+            color: #dbc38b;
+        }
+
+        .sidebar-item.active svg {
+            stroke: #dbc38b;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 38px;
+            background: #dbc38b;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 0 12px rgba(219, 195, 139, 0.8);
+        }
+
+        .sidebar-item:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover svg {
+            stroke: #ffffff;
+            transform: scale(1.1);
+        }
+
+        
+            background-color: #0d0d0d;
+            margin-right: 110px;
+            width: calc(100% - 110px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+            align-items: center;
+        }
+
+        /* الهيدر الذهبي المنحني الأطراف */
+        .web-header {
+            background-color: #dbc38b;
+            color: #000000;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 35px rgba(219, 195, 139, 0.3);
+            width: 100%;
+            margin: 0 0 30px 0;
+        }
+
+        .web-header-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: right;
+            color: #000000;
+        }
+
+        /* القائمة الجانبية المنزلقة (الدراور) */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: #111111;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-drawer.open {
+            right: 0;
+        }
+
+        .close-drawer-btn {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawer-profile {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffffff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #dbc38b;
+        }
+
+        .drawer-profile h3 {
+            font-size: 20px;
+            color: #dbc38b;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .drawer-menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .drawer-menu li a:hover {
+            background: #dbc38b;
+            color: #000000;
+            border-color: #dbc38b;
+        }
+
+        .screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 990;
+            display: none;
+        }
+
+        .screen-overlay.show {
+            display: block;
+        }
+    
+        .header-back-btn {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            color: #000000 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn:hover {
+            background: #000000 !important;
+            color: #dbc38b !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+        .header-back-btn-dark {
+            background: rgba(219, 195, 139, 0.15) !important;
+            border: 1px solid #dbc38b !important;
+            color: #dbc38b !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            font-size: 20px !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .header-back-btn-dark:hover {
+            background: #dbc38b !important;
+            color: #000000 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 15px rgba(219, 195, 139, 0.4) !important;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- 1. الشريط الجانبي الأيمن المثبت -->
+    <aside class="web-sidebar">
+        <button class="sidebar-menu-btn" onclick="toggleMenu()" title="القائمة الرئيسية">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2.5">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <nav class="sidebar-nav-vertical">
+            <a class="sidebar-item" onclick="window.location.href='/tailor-dashboard.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                <span>الرئيسية</span>
+            </a>
+            <a class="sidebar-item active" onclick="window.location.href='/new-sizes.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dbc38b" stroke-width="2">
+                    <path
+                        d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                    </path>
+                </svg>
+                <span>مقاسات جديدة</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/tailor-orders.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2">
+                    <path
+                        d="M20.38 3.46L16 2l-4 4-4-4-4.38 1.46a2 2 0 0 0-1.28 1.66L1.12 11.4a2 2 0 0 0 .91 2.05l3.97 2.47V21a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.08l3.97-2.47a2 2 0 0 0 .91-2.05l-1.22-6.28a2 2 0 0 0-1.28-1.66z">
+                    </path>
+                </svg>
+                <span>طلباتي</span>
+            </a>
+            <a class="sidebar-item" onclick="window.location.href='/payment.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                </svg>
+                <span>الدفع</span>
+            </a>
+        </nav>
+        <div></div>
+    </aside>
+
+    <div class="main-wrapper">
+        <!-- الهيدر العلوي الذهبي المطابق لواجهة العميل -->
+        <header class="web-header" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <button onclick="if(document.referrer && document.referrer !== location.href){history.back();}else{location.href='/customer-dashboard.html';}" class="header-back-btn" title="رجوع للواجهة السابقة" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <h1 class="header-title" style="flex: 1; text-align: center; margin: 0;">العملاء (قياسات جديدة)</h1>
+            <div style="width: 44px; flex-shrink: 0;"></div>
+        </header>
+
+        <div class="page-container" style="padding: 0 40px; width: 100%; max-width: 1100px;">
+
+            <!-- شريط التنقل المتسلسل -->
+            <div class="step-nav-bar">
+                <div class="step-tab active" id="tab1" onclick="switchStep(1)">1. العملاء</div>
+                <div class="step-tab" id="tab2" onclick="switchStep(2)">2. واجهة الاختيار (بالصور)</div>
+                <div class="step-tab" id="tab3" onclick="switchStep(3)">3. واجهة الخانات التفصيلية</div>
+            </div>
+
+            <!-- STEP 1: واجهة العملاء -->
+            <div class="view-section active" id="step1View">
+                <div class="search-box-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="custSearchInput"
+                        placeholder="ابحث باسم العميل أو رقم الهاتف..." onkeyup="searchCustomers()">
+                </div>
+
+                <div style="font-size: 15px; font-weight: bold; color: var(--gold-accent); margin-top: 5px;">
+                    اختر عميلاً قائمًا أو انقر زر الإضافة [ + 👤 ] لإضافة عميل جديد:
+                </div>
+
+                <!-- عميل 1 (صالح الكميم - مأخوذ من صورتك) -->
+                <div class="customer-card-item" onclick="selectCustomer('صالح الكميم', '77943456')">
+                    <div class="cust-meta">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+                            class="cust-avatar-circle" alt="صالح الكميم">
+                        <div class="cust-info-text">
+                            <div class="cust-fullname">صالح الكميم</div>
+                            <div class="cust-date">هاتف: 77943456 • سلك أبيض</div>
+                            <div style="font-size: 12px; color: var(--gold-accent); font-weight: bold;">(ثوب - $30)
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left" style="color: var(--gold-accent);"></i>
+                </div>
+
+                <!-- عميل 2 (فؤاد محمد محسن الجلال) -->
+                <div class="customer-card-item" onclick="selectCustomer('فؤاد محمد محسن الجلال', '771234567')">
+                    <div class="cust-meta">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
+                            class="cust-avatar-circle" alt="فؤاد الجلال">
+                        <div class="cust-info-text">
+                            <div class="cust-fullname">فؤاد محمد محسن الجلال</div>
+                            <div class="cust-date">هاتف: 771234567 • قطن ياباني</div>
+                            <div style="font-size: 12px; color: var(--gold-accent); font-weight: bold;">(بدلات عسكرية)
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-left" style="color: var(--gold-accent);"></i>
+                </div>
+            </div>
+
+            <!-- STEP 2: واجهة الاختيار (الكروت بجميع الفئات المطابقة لصورتك) -->
+            <div class="view-section" id="step2View">
+                <div style="font-size: 16px; font-weight: bold; color: var(--gold-accent);">
+                    اختر القسم والواجهة المطلوب فتح خاناتها للعميل (<span id="selectedCustNameLabel">صالح
+                        الكميم</span>):
+                </div>
+
+                <div class="categories-selection-grid">
+                    <!-- 1. أثواب (iPhone X - 36) -->
+                    <div class="cat-select-card" onclick="selectCategory('athwab')">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&auto=format&fit=crop&q=80"
+                            class="cat-img-banner" alt="أثواب">
+                        <div class="cat-card-body">
+                            <div class="cat-title-text">أثواب</div>
+                            <div class="cat-badge-tag">15 خانة أثواب</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. مقاسات البدلات (iPhone X - 13) -->
+                    <div class="cat-select-card" onclick="selectCategory('suits')">
+                        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&auto=format&fit=crop&q=80"
+                            class="cat-img-banner" alt="مقاسات البدلات">
+                        <div class="cat-card-body">
+                            <div class="cat-title-text">مقاسات البدلات</div>
+                            <div class="cat-badge-tag">16 خانة قميص + بنطلون</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. نسائي (iPhone X - 6) -->
+                    <div class="cat-select-card" onclick="selectCategory('womens')">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&auto=format&fit=crop&q=80"
+                            class="cat-img-banner" alt="نسائي">
+                        <div class="cat-card-body">
+                            <div class="cat-title-text">نسائي / بناتي</div>
+                            <div class="cat-badge-tag">17 خانة نسائي فساتين</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. بدلات عسكرية (iPhone X - 39) -->
+                    <div class="cat-select-card" onclick="selectCategory('military')">
+                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&auto=format&fit=crop&q=80"
+                            class="cat-img-banner" alt="بدلات عسكرية">
+                        <div class="cat-card-body">
+                            <div class="cat-title-text">بدلات عسكرية</div>
+                            <div class="cat-badge-tag">14 خانة جاكيت + بنطلون عسكري</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: واجهة الخانات الشاملة المطابقة 100% لكل شاشة في صورتك -->
+            <div class="view-section" id="step3View">
+                <div class="form-section-card">
+
+                    <!-- شريط معلومات العميل الذهبي المطابق لأعلى الشاشة في صورتك -->
+                    <div class="cust-header-info-bar" id="topCustInfoBar">
+                        <!-- سيتم تحديثه بالبيانات ديناميكياً -->
+                    </div>
+
+                    <div id="dynamicFieldsContainer">
+                        <!-- سيتم توليد خانات الشاشة المحددة هنا من صورتك بدقة 100% -->
+                    </div>
+
+                    <button class="btn-submit-size" onclick="submitAndShowConfirmation()">
+                        <i class="fas fa-check-circle"></i> حفظ كافة الخانات وإصدار السند
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- زر إضافة عميل عائم [ + 👤 ] -->
+    <button class="floating-add-cust-btn" onclick="openAddCustomerModal()" title="إضافة عميل جديد">
+        <i class="fas fa-user-plus"></i>
+    </button>
+
+    <!-- مودال إضافة عميل جديد -->
+    <div class="modal-backdrop" id="addCustModal">
+        <div class="add-cust-box">
+            <div
+                style="font-size: 18px; font-weight: bold; color: var(--gold-accent); border-bottom: 1px solid #333; padding-bottom: 10px;">
+                <i class="fas fa-user-plus"></i> إضافة عميل جديد
+            </div>
+            <div class="form-group">
+                <label class="form-label">اسم العميل:</label>
+                <input type="text" class="form-input" id="newCustName" placeholder="مثال: صالح الكميم">
+            </div>
+            <div class="form-group">
+                <label class="form-label">رقم الهاتف:</label>
+                <input type="text" class="form-input" id="newCustPhone" placeholder="77943456">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="btn-submit-size" style="flex: 1; padding: 12px; margin: 0;"
+                    onclick="saveNewCustomerAndNavigate()">حفظ والانتقال للاختيار</button>
+                <button class="btn-confirm-continue" style="flex: 1;" onclick="closeAddCustomerModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال رسالة التأكيد -->
+    <div class="modal-backdrop" id="confirmModal">
+        <div class="confirmation-box">
+            <div class="confirm-title-badge">رسالة التأكيد</div>
+
+            <div class="thobe-illustration-card">
+                <i class="fas fa-tshirt" style="font-size: 55px; color: var(--gold-accent);"></i>
+                <div class="confirm-details-list">
+                    <div><b>اسم العميل:</b> <span id="confCustName">صالح الكميم</span></div>
+                    <div><b>الواجهة والنوع:</b> <span id="confThobeType">أثواب</span></div>
+                    <div><b>الحالة:</b> <span style="color: var(--gold-accent); font-weight: bold;">تم تفعيل وتوثيق كافة
+                            الخانات</span></div>
+                </div>
+            </div>
+
+            <div class="confirm-actions-row">
+                <button class="btn-confirm-print" onclick="printThermalTicket()">
+                    <i class="fas fa-print"></i> طباعة سند
+                </button>
+                <button class="btn-confirm-continue" onclick="finishOrder()">
+                    <i class="fas fa-arrow-left"></i> استمرار
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الشريط السفلي للجوال -->
+    <nav class="bottom-nav">
+        <a href="/tailor-dashboard.html" class="bottom-nav-item">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="/new-sizes.html" class="bottom-nav-item active">
+            <div class="icon-circle">
+                <i class="fas fa-ruler"></i>
+            </div>
+            <span>قياسات جديدة</span>
+        </a>
+        <a href="/tailor-orders.html" class="bottom-nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>الطلبات</span>
+        </a>
+        <a href="/tailor-chat.html" class="bottom-nav-item">
+            <i class="fas fa-comments"></i>
+            <span>المحادثات</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentCustomer = "صالح الكميم";
+        let currentPhone = "77943456";
+        let currentCatKey = "athwab";
+        let currentCatTitle = "أثواب";
+
+        function switchStep(step) {
+            document.querySelectorAll('.step-tab').forEach((t, i) => {
+                if (i === step - 1) t.classList.add('active');
+                else t.classList.remove('active');
+            });
+
+            document.querySelectorAll('.view-section').forEach((v, i) => {
+                if (i === step - 1) v.classList.add('active');
+                else v.classList.remove('active');
+            });
+
+            if (step === 1) document.getElementById('pageHeaderTitle').innerText = "العملاء (قياسات جديدة)";
+            if (step === 2) document.getElementById('pageHeaderTitle').innerText = "واجهة الاختيار (الأثواب والبدلات)";
+            if (step === 3) document.getElementById('pageHeaderTitle').innerText = "واجهة: " + currentCatTitle;
+        }
+
+        function selectCustomer(name, phone) {
+            currentCustomer = name;
+            currentPhone = phone;
+            document.getElementById('selectedCustNameLabel').innerText = name;
+            switchStep(2);
+        }
+
+        function selectCategory(catKey) {
+            currentCatKey = catKey;
+            renderScreenExactFromImage(catKey);
+            switchStep(3);
+        }
+
+        /* توليد جميع الخانات المأخوذة 100% من صور الشاشات الأربع في مخطط Adobe XD الخاص بك */
+        function renderScreenExactFromImage(key) {
+            const topBar = document.getElementById('topCustInfoBar');
+            const container = document.getElementById('dynamicFieldsContainer');
+            let topHtml = '';
+            let html = '';
+
+            if (key === 'athwab') {
+                // الشاشة 1 بالصورة: أثواب (iPhone X, XS, 11 Pro - 36)
+                currentCatTitle = "أثواب";
+                topHtml = `
+                    <div class="cust-header-item"><span>اسم العميل:</span><span>${currentCustomer}</span></div>
+                    <div class="cust-header-item"><span>رقم الهاتف:</span><span>${currentPhone}</span></div>
+                    <div class="cust-header-item"><span>نوع القماش:</span><span>سلك أبيض</span></div>
+                    <div class="cust-header-item"><span>السعر والعدد:</span><span>$30 (عدد: 1)</span></div>
+                `;
+
+                html = `
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px;">
+                        خانات واجهة الأثواب (مفعلة بالكامل):
+                    </div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">طول الثوب:</label><input type="number" class="form-input" value="144"></div>
+                        <div class="form-group"><label class="form-label">الكتف:</label><input type="number" class="form-input" value="45"></div>
+                        <div class="form-group"><label class="form-label">طول الكم:</label><input type="number" class="form-input" value="62"></div>
+                        <div class="form-group"><label class="form-label">وسع العضد:</label><input type="number" class="form-input" value="22"></div>
+                    </div>
+
+                    <div class="form-grid-4" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">الفتحة (فتحة الكم):</label><input type="number" class="form-input" value="16"></div>
+                        <div class="form-group"><label class="form-label">وسع الصدر:</label><input type="number" class="form-input" value="57"></div>
+                        <div class="form-group"><label class="form-label">وسع الخصر:</label><input type="number" class="form-input" value="55"></div>
+                        <div class="form-group"><label class="form-label">وسع الأسفل:</label><input type="number" class="form-input" value="79"></div>
+                    </div>
+
+                    <div class="form-grid-4" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">الرقبة:</label><input type="number" class="form-input" value="40"></div>
+                        <div class="form-group"><label class="form-label">ارتفاع الياقة:</label><input type="number" class="form-input" value="4"></div>
+                        <div class="form-group"><label class="form-label">جيب الصدر:</label><input type="number" class="form-input" value="14"></div>
+                        <div class="form-group"><label class="form-label">نوع الجيب:</label><select class="form-select"><option>مخفي عادي</option><option>بارز مع زرار</option></select></div>
+                    </div>
+
+                    <div class="form-grid-3" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">نوع الخياطة / الزرار:</label><select class="form-select"><option>أزرار مخفية</option><option>أزرار بارزة ملونة</option></select></div>
+                        <div class="form-group"><label class="form-label">نوع القماش:</label><select class="form-select"><option>سلك أبيض ياباني</option><option>قطن بلي</option></select></div>
+                        <div class="form-group"><label class="form-label">ملاحظة:</label><input type="text" class="form-input" value="خياطة متينة ومريحة"></div>
+                    </div>
+                `;
+            } else if (key === 'suits') {
+                // الشاشة 2 بالصورة: مقاسات البدلات (iPhone X, XS, 11 Pro - 13)
+                currentCatTitle = "مقاسات البدلات";
+                topHtml = `
+                    <div class="cust-header-item"><span>اسم العميل:</span><span>${currentCustomer}</span></div>
+                    <div class="cust-header-item"><span>رقم الهاتف:</span><span>${currentPhone}</span></div>
+                    <div class="cust-header-item"><span>رقم القماش:</span><span>P-992</span></div>
+                `;
+
+                html = `
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-bottom: 8px;">1. مقاسات القميص:</div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">طول القميص:</label><input type="number" class="form-input" value="76"></div>
+                        <div class="form-group"><label class="form-label">الكتف:</label><input type="number" class="form-input" value="46"></div>
+                        <div class="form-group"><label class="form-label">طول الكم:</label><input type="number" class="form-input" value="63"></div>
+                        <div class="form-group"><label class="form-label">وسع العضد:</label><input type="number" class="form-input" value="21"></div>
+                    </div>
+                    <div class="form-grid-4" style="margin-top: 12px;">
+                        <div class="form-group"><label class="form-label">الرقبة:</label><input type="number" class="form-input" value="41"></div>
+                        <div class="form-group"><label class="form-label">وسع الصدر:</label><input type="number" class="form-input" value="56"></div>
+                        <div class="form-group"><label class="form-label">وسع الخصر:</label><input type="number" class="form-input" value="52"></div>
+                        <div class="form-group"><label class="form-label">ملاحظة القميص:</label><input type="text" class="form-input" value="ياقة رسمية"></div>
+                    </div>
+
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-top: 16px; margin-bottom: 8px;">2. مقاسات البنطلون:</div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">طول البنطلون:</label><input type="number" class="form-input" value="104"></div>
+                        <div class="form-group"><label class="form-label">عرض الفخذ:</label><input type="number" class="form-input" value="32"></div>
+                        <div class="form-group"><label class="form-label">عرض الركبة:</label><input type="number" class="form-input" value="24"></div>
+                        <div class="form-group"><label class="form-label">عرض القدم / الأسفل:</label><input type="number" class="form-input" value="20"></div>
+                    </div>
+                    <div class="form-grid-3" style="margin-top: 12px;">
+                        <div class="form-group"><label class="form-label">عرض الخصر / الوسط:</label><input type="number" class="form-input" value="44"></div>
+                        <div class="form-group"><label class="form-label">فتحة الجيب:</label><input type="text" class="form-input" value="جيب أمامي إيطالي"></div>
+                        <div class="form-group"><label class="form-label">موعد التسليم:</label><input type="date" class="form-input" value="2026-08-25"></div>
+                    </div>
+                `;
+            } else if (key === 'womens') {
+                // الشاشة 3 بالصورة: نسائي (iPhone X, XS, 11 Pro - 6)
+                currentCatTitle = "نسائي";
+                topHtml = `
+                    <div class="cust-header-item"><span>اسم العميل:</span><span>${currentCustomer}</span></div>
+                    <div class="cust-header-item"><span>رقم الهاتف:</span><span>${currentPhone}</span></div>
+                    <div class="cust-header-item"><span>نوع القماش والكمية:</span><span>حرير فاخر (كمية: 3)</span></div>
+                `;
+
+                html = `
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-bottom: 10px;">خانات الواجهة النسائية (مفعلة بالكامل):</div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">تاريخ الاستلام:</label><input type="date" class="form-input" value="2026-08-28"></div>
+                        <div class="form-group"><label class="form-label">طول الفستان:</label><input type="number" class="form-input" value="138"></div>
+                        <div class="form-group"><label class="form-label">عرض الكتف:</label><input type="number" class="form-input" value="39"></div>
+                        <div class="form-group"><label class="form-label">طول الكم:</label><input type="number" class="form-input" value="58"></div>
+                    </div>
+                    <div class="form-grid-4" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">وسع الصدر:</label><input type="number" class="form-input" value="92"></div>
+                        <div class="form-group"><label class="form-label">وسع الخصر:</label><input type="number" class="form-input" value="76"></div>
+                        <div class="form-group"><label class="form-label">وسع الورك:</label><input type="number" class="form-input" value="102"></div>
+                        <div class="form-group"><label class="form-label">وسع الأسفل / الذيل:</label><input type="number" class="form-input" value="110"></div>
+                    </div>
+                    <div class="form-grid-4" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">عمق فتحة الرقبة:</label><input type="number" class="form-input" value="18"></div>
+                        <div class="form-group"><label class="form-label">ارتفاع الصدرية:</label><input type="number" class="form-input" value="38"></div>
+                        <div class="form-group"><label class="form-label">طول التنورة:</label><input type="number" class="form-input" value="100"></div>
+                        <div class="form-group"><label class="form-label">نوع البطانة:</label><select class="form-select"><option>بطانة حرير</option><option>بدون بطانة</option></select></div>
+                    </div>
+                    <div class="form-grid-3" style="margin-top: 14px;">
+                        <div class="form-group"><label class="form-label">نوع السحاب:</label><select class="form-select"><option>سحاب خلفي مخفي</option><option>سحاب جانبي</option></select></div>
+                        <div class="form-group"><label class="form-label">ملاحظات:</label><input type="text" class="form-input" value="تطريز ذهبي ناعم"></div>
+                        <div class="form-group"><label class="form-label">موعد التسليم النهائي:</label><input type="date" class="form-input" value="2026-08-30"></div>
+                    </div>
+                `;
+            } else if (key === 'military') {
+                // الشاشة 4 بالصورة: بدلات عسكرية (iPhone X, XS, 11 Pro - 39)
+                currentCatTitle = "بدلات عسكرية";
+                topHtml = `
+                    <div class="cust-header-item"><span>اسم العميل:</span><span>${currentCustomer}</span></div>
+                    <div class="cust-header-item"><span>رقم الهاتف:</span><span>${currentPhone}</span></div>
+                    <div class="cust-header-item"><span>رتبة الضابط / القماش:</span><span>ملازم أول (قماش مضلع)</span></div>
+                `;
+
+                html = `
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-bottom: 8px;">1. مقاسات الجاكيت العسكري:</div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">طول الجاكيت:</label><input type="number" class="form-input" value="78"></div>
+                        <div class="form-group"><label class="form-label">عرض الكتف:</label><input type="number" class="form-input" value="48"></div>
+                        <div class="form-group"><label class="form-label">طول الكم:</label><input type="number" class="form-input" value="64"></div>
+                        <div class="form-group"><label class="form-label">وسع العضد:</label><input type="number" class="form-input" value="23"></div>
+                    </div>
+                    <div class="form-grid-4" style="margin-top: 12px;">
+                        <div class="form-group"><label class="form-label">وسع الصدر:</label><input type="number" class="form-input" value="104"></div>
+                        <div class="form-group"><label class="form-label">وسع الخصر:</label><input type="number" class="form-input" value="88"></div>
+                        <div class="form-group"><label class="form-label">مكان الكتفيات / الرتب:</label><select class="form-select"><option>كتفيات أزرار</option><option>لاصق</option></select></div>
+                        <div class="form-group"><label class="form-label">عدد الجيوب العسكرية:</label><select class="form-select"><option>4 جيوب رسمي</option><option>6 جيوب ميداني</option></select></div>
+                    </div>
+
+                    <div style="font-weight: bold; color: var(--gold-accent); font-size: 16px; margin-top: 16px; margin-bottom: 8px;">2. مقاسات البنطلون العسكري:</div>
+                    <div class="form-grid-4">
+                        <div class="form-group"><label class="form-label">طول البنطلون:</label><input type="number" class="form-input" value="106"></div>
+                        <div class="form-group"><label class="form-label">عرض الفخذ:</label><input type="number" class="form-input" value="34"></div>
+                        <div class="form-group"><label class="form-label">عرض القدم:</label><input type="number" class="form-input" value="21"></div>
+                        <div class="form-group"><label class="form-label">عرض الخصر:</label><input type="number" class="form-input" value="44"></div>
+                    </div>
+                    <div class="form-grid-2" style="margin-top: 12px;">
+                        <div class="form-group"><label class="form-label">حلقات الحزام:</label><input type="number" class="form-input" value="6"></div>
+                        <div class="form-group"><label class="form-label">موعد التسليم:</label><input type="date" class="form-input" value="2026-08-27"></div>
+                    </div>
+                `;
+            }
+
+            topBar.innerHTML = topHtml;
+            container.innerHTML = html;
+        }
+
+        function submitAndShowConfirmation() {
+            document.getElementById('confCustName').innerText = currentCustomer;
+            document.getElementById('confThobeType').innerText = currentCatTitle;
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function printThermalTicket() {
+            alert("جاري طباعة السند الحراري للعميل: " + currentCustomer + "\nالواجهة: " + currentCatTitle);
+        }
+
+        function finishOrder() {
+            document.getElementById('confirmModal').classList.remove('active');
+            alert("تم حفظ وتفعيل كافة خانات الشاشة بنجاح!");
+            window.location.href = "/tailor-orders.html";
+        }
+
+        function openAddCustomerModal() {
+            document.getElementById('addCustModal').classList.add('active');
+        }
+
+        function closeAddCustomerModal() {
+            document.getElementById('addCustModal').classList.remove('active');
+        }
+
+        function saveNewCustomerAndNavigate() {
+            const name = document.getElementById('newCustName').value.trim();
+            const phone = document.getElementById('newCustPhone').value.trim() || '77943456';
+            if (!name) return alert("يرجى كتابة اسم العميل");
+
+            closeAddCustomerModal();
+            selectCustomer(name, phone);
+        }
+
+        function searchCustomers() {
+            const query = document.getElementById('custSearchInput').value.toLowerCase();
+            document.querySelectorAll('.customer-card-item').forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+        function toggleMenu() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // تفعيل الواجهة الأولى (أثواب) افتراضياً عند البدء
+        renderScreenExactFromImage('athwab');
+    </script>
+
+    <!-- القائمة الجانبية المنزلقة (الدراور) -->
+    <aside class="side-drawer" id="drawer">
+        <button class="close-drawer-btn" onclick="toggleMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            إغلاق
+        </button>
+
+        <div class="drawer-profile">
+            <div class="profile-avatar">
+                <i class="fas fa-scissors"></i>
+            </div>
+            <h3>حساب الخياط</h3>
+        </div>
+
+        <ul class="drawer-menu">
+            <li>
+                <a href="/tailor-dashboard.html">
+                    <span>الرئيسية (لوحة الخياط)</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/new-sizes.html">
+                    <span>القياسات الجديدة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <path
+                            d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z">
+                        </path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/tailor-ready-sizes.html">
+                    <span>القياسات الجاهزة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/tailor-orders.html">
+                    <span>طلبات التفصيل الواردة</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li style="margin-top: 20px;">
+                <a href="/login/login.html" style="color: #ff5555;">
+                    <span>تسجيل الخروج</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+</body>
+
+</html>
